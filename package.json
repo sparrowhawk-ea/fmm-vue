@@ -1,0 +1,54 @@
+{
+	"author": "sparrowhawk-ea",
+	"bugs": {
+		"url": "https://github.com/sparrowhawk-ea/fmmp-vue/issues"
+	},
+	"description": "Form Minimap Vue",
+	"devDependencies": {
+		"@fmmp/core": "^1.0.0",
+		"@typescript-eslint/eslint-plugin": "^4.16.1",
+		"@typescript-eslint/parser": "^4.16.1",
+		"@vue/eslint-config-prettier": "^6.0.0",
+		"@vue/eslint-config-typescript": "^7.0.0",
+		"eslint": "^7.0.0",
+		"eslint-plugin-prettier": "^3.3.1",
+		"eslint-plugin-vue": "^7.0.0",
+		"prettier": "^2.2.1",
+		"tslib": "^2.1.0",
+		"typescript": "^4.2.3",
+		"vue": "^2.6.12"
+	},
+	"files": [
+		"dist/**/*"
+	],
+	"homepage": "https://github.com/sparrowhawk-ea/fmmp-vue#readme",
+	"keywords": [
+		"Form",
+		"Minimap",
+		"Vue"
+	],
+	"license": "MIT",
+	"main": "dist/index.js",
+	"name": "@fmmp/vue",
+	"peerDependencies": {
+		"@fmmp/core": "^1.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sparrowhawk-ea/fmmp-vue.git"
+	},
+	"scripts": {
+		"build": "tsc",
+		"format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+		"lint": "eslint --report-unused-disable-directives --ext .ts .",
+		"postversion": "git push && git push --tags",
+		"prebuild": "rm -rf dist",
+		"prepare": "npm run build",
+		"prepublishOnly": "npm run lint",
+		"preversion": "npm run lint",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"version": "npm run format && git add -A src"
+	},
+	"types": "dist/index.d.ts",
+	"version": "1.0.0"
+}
