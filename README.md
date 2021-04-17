@@ -3,6 +3,73 @@ Vue components for [Form Minimap](https://github.com/sparrowhawk-ea/fmmp-core).
 Please consult that documentation for further information on the concepts mentioned below.
 
 ***
+# Getting Started
+## Installation
+```bash
+npm install --save @fmmp/vue
+```
+
+## Adding Form Minimap
+Before
+```html
+<script>
+    export default {
+        name: 'App'
+    }
+</script>
+
+<template>
+    <div id="app">
+        <form>
+            <input id="Input1"/><br/>
+            <input id="Input2"/><br/>
+            <input id="Input3"/><br/>
+            <input id="Input4"/>
+        </form>
+    </div>
+</template>
+```
+After
+```html
+<script>
+    import { FmmVueMinimap, FmmVuePanel } from '@fmmp/vue'
+    export default {
+        name: 'App',
+        components: {
+            FmmVueMinimap,
+            FmmVuePanel
+        },
+        data: () => ({
+            refPanel: undefined
+        }),
+        mounted() {
+            this.refPanel = this.$refs.panel;
+        }
+    }
+</script>
+
+<style>
+    .fmm-frame { height: 50px; }
+    .fmm-panel { height: 0; }
+</style>
+
+<template>
+    <div id="app">
+        <div ref='anchor' style='width:20px; height:20px; margin-left:200px'></div>
+        <FmmVuePanel ref='panel'/>
+        <form>
+            <FmmVueMinimap v-if='refPanel' :anchor='this.$refs.anchor' :panel='refPanel' title='Title'/>
+            <input id="Input1"/><br/>
+            <input id="Input2"/><br/>
+            <input id="Input3"/><br/>
+            <input id="Input4"/>
+        </form>
+    </div>
+</template>
+```
+
+***
+# API
 ## FmmVueMinimap
 Component to create and manage [FmmMinimap](https://github.com/sparrowhawk-ea/fmmp-core#fmmminimap).
 The minimap is detached when this component is destroyed.

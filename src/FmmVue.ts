@@ -132,10 +132,7 @@ export const FmmVuePanel = Vue.extend({
 
 	// =============================================================================================================================
 	props: {
-		detailParent: {
-			required: true,
-			type: HTMLDivElement
-		},
+		detailParent: HTMLDivElement,
 		vertical: Boolean
 	},
 

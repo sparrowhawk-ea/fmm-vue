@@ -124,10 +124,7 @@ exports.FmmVuePanel = vue_1.default.extend({
     name: 'FmmVuePanel',
     // =============================================================================================================================
     props: {
-        detailParent: {
-            required: true,
-            type: HTMLDivElement
-        },
+        detailParent: HTMLDivElement,
         vertical: Boolean
     },
     // =============================================================================================================================
