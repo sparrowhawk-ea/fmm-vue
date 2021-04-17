@@ -1,13 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FmmVuex = exports.FmmVueStore = exports.FmmVuePanel = exports.FmmVueMinimap = void 0;
-var tslib_1 = require("tslib");
-var vue_1 = tslib_1.__importDefault(require("vue"));
-var core_1 = require("@eafmm/core");
+import Vue from 'vue';
+import { Fmm, FmmMapStore } from '@eafmm/core';
 // =================================================================================================================================
 //						F M M V U E M I N I M A P
 // =================================================================================================================================
-exports.FmmVueMinimap = vue_1.default.extend({
+export var FmmVueMinimap = Vue.extend({
     // =============================================================================================================================
     destroyed: function () {
         var minimap = G.MINIMAPS.get(this);
@@ -98,7 +94,7 @@ exports.FmmVueMinimap = vue_1.default.extend({
 // =================================================================================================================================
 //						F M M V U E P A N E L
 // =================================================================================================================================
-exports.FmmVuePanel = vue_1.default.extend({
+export var FmmVuePanel = Vue.extend({
     // =============================================================================================================================
     destroyed: function () {
         var panel = G.PANELS.get(this);
@@ -118,7 +114,7 @@ exports.FmmVuePanel = vue_1.default.extend({
     mounted: function () {
         if (Object.keys(this.$scopedSlots).length)
             throw new Error('FmmVuePanel is a contentless tag');
-        G.PANELS.set(this, core_1.Fmm.createPanel(undefined, this.$el, this.detailParent, this.vertical));
+        G.PANELS.set(this, Fmm.createPanel(undefined, this.$el, this.detailParent, this.vertical));
     },
     // =============================================================================================================================
     name: 'FmmVuePanel',
@@ -133,14 +129,14 @@ exports.FmmVuePanel = vue_1.default.extend({
             ce('style', {
                 tag: 'component',
                 attrs: { type: 'text/css' }
-            }, core_1.Fmm.CSS)
+            }, Fmm.CSS)
         ]);
     }
 });
 // =================================================================================================================================
 //						F M M V U E S T O R E
 // =================================================================================================================================
-exports.FmmVueStore = vue_1.default.extend({
+export var FmmVueStore = Vue.extend({
     // =============================================================================================================================
     data: function () {
         return {
@@ -151,7 +147,7 @@ exports.FmmVueStore = vue_1.default.extend({
     mounted: function () {
         if (Object.keys(this.$scopedSlots).length)
             throw new Error('FmmVueStore is a contentless tag');
-        this.$emit('store', (this.store = new core_1.FmmMapStore(this.values, this.errors)));
+        this.$emit('store', (this.store = new FmmMapStore(this.values, this.errors)));
     },
     // =============================================================================================================================
     name: 'FmmVueStore',
@@ -178,7 +174,7 @@ exports.FmmVueStore = vue_1.default.extend({
 // =================================================================================================================================
 //						F M M V U E X
 // =================================================================================================================================
-exports.FmmVuex = vue_1.default.extend({
+export var FmmVuex = Vue.extend({
     // =============================================================================================================================
     data: function () {
         return {
@@ -196,7 +192,7 @@ exports.FmmVuex = vue_1.default.extend({
         var _this = this;
         if (Object.keys(this.$scopedSlots).length)
             throw new Error('FmmVuex is a contentless tag');
-        this.$emit('store', (this.store = new core_1.FmmMapStore(this.$store.state, this.errors)));
+        this.$emit('store', (this.store = new FmmMapStore(this.$store.state, this.errors)));
         this.unsubscribeToStore = this.$store.subscribe(function (_, state) { return _this.store.update(state, _this.errors); });
     },
     // =============================================================================================================================
