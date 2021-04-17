@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FmmVuex = exports.FmmVueStore = exports.FmmVuePanel = exports.FmmVueMinimap = void 0;
 var tslib_1 = require("tslib");
 var vue_1 = tslib_1.__importDefault(require("vue"));
-var core_1 = require("@fmmp/core");
+var core_1 = require("@eafmm/core");
 // =================================================================================================================================
 //						F M M V U E M I N I M A P
 // =================================================================================================================================

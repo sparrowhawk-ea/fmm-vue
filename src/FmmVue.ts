@@ -12,7 +12,7 @@ import {
 	FmmPanel,
 	FmmStore,
 	FmmWidgetFactory
-} from '@fmmp/core';
+} from '@eafmm/core';
 
 // =================================================================================================================================
 //						F M M V U E M I N I M A P

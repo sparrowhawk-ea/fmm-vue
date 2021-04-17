@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { FmmFramework, FmmMapErrors, FmmMapStore, FmmMapString, FmmMapValues, FmmStore, FmmWidgetFactory } from '@fmmp/core';
+import { FmmFramework, FmmMapErrors, FmmMapStore, FmmMapString, FmmMapValues, FmmStore, FmmWidgetFactory } from '@eafmm/core';
 export declare const FmmVueMinimap: import("vue/types/vue").ExtendedVue<Vue, unknown, {
     destructor(): void;
     takeSnapshot(): boolean;

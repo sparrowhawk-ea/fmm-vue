@@ -1,7 +1,7 @@
 {
 	"author": "sparrowhawk-ea",
 	"bugs": {
-		"url": "https://github.com/sparrowhawk-ea/fmmp-vue/issues"
+		"url": "https://github.com/sparrowhawk-ea/fmm-vue/issues"
 	},
 	"description": "Form Minimap Vue",
 	"devDependencies": {
@@ -20,7 +20,7 @@
 	"files": [
 		"dist/**/*"
 	],
-	"homepage": "https://github.com/sparrowhawk-ea/fmmp-vue#readme",
+	"homepage": "https://github.com/sparrowhawk-ea/fmm-vue#readme",
 	"keywords": [
 		"Form",
 		"Minimap",
@@ -28,13 +28,13 @@
 	],
 	"license": "MIT",
 	"main": "dist/index.js",
-	"name": "@fmmp/vue",
+	"name": "@eafmm/vue",
 	"peerDependencies": {
-		"@fmmp/core": "^1.0.1"
+		"@eafmm/core": "^1.0.0"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/sparrowhawk-ea/fmmp-vue.git"
+		"url": "git+https://github.com/sparrowhawk-ea/fmm-vue.git"
 	},
 	"scripts": {
 		"build": "tsc",
@@ -49,5 +49,5 @@
 		"version": "npm run format && git add -A src"
 	},
 	"types": "dist/index.d.ts",
-	"version": "1.0.1"
+	"version": "1.0.0"
 }
