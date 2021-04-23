@@ -72,7 +72,7 @@ After
 # API
 ## FmmVueMinimap
 Component to create and manage [FmmMinimap](https://github.com/sparrowhawk-ea/fmm-core#fmmminimap).
-The minimap is detached when this component is destroyed.
+The minimap is detached when this component is unmounted.
 
 Property | Type | Required
 --- | --- | :---:
