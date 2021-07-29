@@ -44,7 +44,7 @@ export var FmmVueMinimap = defineComponent({
             verbosity: this.verbosity,
             widgetFactories: this.widgetFactories
         };
-        var minimap = (_b = G.PANELS.get(this.panel)) === null || _b === void 0 ? void 0 : _b.createMinimap(fmcp);
+        var minimap = this.panel ? (_b = G.PANELS.get(this.panel)) === null || _b === void 0 ? void 0 : _b.createMinimap(fmcp) : Fmm.createMinimap(fmcp, this.parent);
         if (!minimap)
             return;
         G.MINIMAPS.set(this, minimap);
@@ -63,10 +63,10 @@ export var FmmVueMinimap = defineComponent({
         framework: Object,
         page: HTMLElement,
         panel: {
-            required: true,
             type: Object,
             validator: function (value) { return value.$options.name === 'FmmVuePanel'; }
         },
+        parent: HTMLElement,
         store: Object,
         title: {
             required: true,
@@ -109,7 +109,7 @@ export var FmmVuePanel = defineComponent({
     mounted: function () {
         if (Object.keys(this.$slots).length)
             throw new Error('FmmVuePanel is a contentless tag');
-        G.PANELS.set(this, Fmm.createPanel(undefined, this.$el, this.detailParent, this.vertical));
+        G.PANELS.set(this, Fmm.createPanel(this.$el, this.detailParent, this.vertical));
     },
     // =============================================================================================================================
     name: 'FmmVuePanel',

@@ -29,7 +29,36 @@ Before
     </div>
 </template>
 ```
-After
+After without panel
+```html
+<script>
+    import { FmmVueMinimap } from '@eafmm/vue'
+    export default {
+        name: 'App',
+        components: {
+            FmmVueMinimap
+        }
+    }
+</script>
+
+<style>
+    .fmm-frame { height: 50px; }
+</style>
+
+<template>
+    <div id="app">
+        <div ref='parent' style='width:70px; height:50px; margin-left:200px'></div>
+        <form>
+            <FmmVueMinimap :parent='this.$refs.parent' title='Title'/>
+            <input id="Input1"/><br/>
+            <input id="Input2"/><br/>
+            <input id="Input3"/><br/>
+            <input id="Input4"/>
+        </form>
+    </div>
+</template>
+```
+After with panel
 ```html
 <script>
     import { FmmVueMinimap, FmmVuePanel } from '@eafmm/vue'
@@ -73,6 +102,7 @@ After
 ## FmmVueMinimap
 Component to create and manage [FmmMinimap](https://github.com/sparrowhawk-ea/fmm-core#fmmminimap).
 The minimap is detached when this component is unmounted.
+For minimaps in a panel, use the panelproperty; otherwise use the parent property to show an always-visible minimap, or anchor for a popup minimap.
 
 Property | Type | Required
 --- | --- | :---:
@@ -83,7 +113,8 @@ Property | Type | Required
 [dynamicLabels](https://github.com/sparrowhawk-ea/fmm-core#mcp-dynamiclabels) | string[]
 [framework](https://github.com/sparrowhawk-ea/fmm-core#mcp-framework) | [FmmFramework](https://github.com/sparrowhawk-ea/fmm-core#fmmframework)
 [page](https://github.com/sparrowhawk-ea/fmm-core#mcp-page) | HTMLElement
-panel | [FmmVuePanel](#fmmvuepanel) | &check;
+panel | [FmmVuePanel](#fmmvuepanel)
+[parent](https://github.com/sparrowhawk-ea/fmm-core#pcm-parent) | HTMLElement
 [store](https://github.com/sparrowhawk-ea/fmm-core#mcp-store) | [FmmVueStore](#fmmvuestore)
 [title](https://github.com/sparrowhawk-ea/fmm-core#mcp-title) | String | &check;
 [usePanelDetail](https://github.com/sparrowhawk-ea/fmm-core#mcp-usepaneldetail) | Boolean

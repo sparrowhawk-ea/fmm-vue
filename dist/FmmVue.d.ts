@@ -15,9 +15,12 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
         prototype: HTMLElement;
     };
     panel: {
-        required: true;
         type: PropType<ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>>;
         validator: (value: ComponentPublicInstance) => boolean;
+    };
+    parent: {
+        new (): HTMLElement;
+        prototype: HTMLElement;
     };
     store: PropType<FmmStore>;
     title: {
@@ -41,6 +44,7 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
     framework?: unknown;
     page?: unknown;
     panel?: unknown;
+    parent?: unknown;
     store?: unknown;
     title?: unknown;
     usePanelDetail?: unknown;
@@ -49,7 +53,17 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
     widgetFactories?: unknown;
 } & {
     title: string;
-    panel: {
+    usePanelDetail: boolean;
+    useWidthToScale: boolean;
+} & {
+    anchor?: HTMLElement;
+    page?: HTMLElement;
+    aggregateLabels?: FmmMapString;
+    customWidgetIds?: string[];
+    debounceMsec?: number;
+    dynamicLabels?: string[];
+    framework?: FmmFramework;
+    panel?: {
         $: import("vue").ComponentInternalInstance;
         $data: {};
         $props: {};
@@ -87,16 +101,7 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
         $nextTick: typeof import("vue").nextTick;
         $watch(source: string | Function, cb: Function, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
     };
-    usePanelDetail: boolean;
-    useWidthToScale: boolean;
-} & {
-    anchor?: HTMLElement;
-    page?: HTMLElement;
-    aggregateLabels?: FmmMapString;
-    customWidgetIds?: string[];
-    debounceMsec?: number;
-    dynamicLabels?: string[];
-    framework?: FmmFramework;
+    parent?: HTMLElement;
     store?: FmmStore;
     verbosity?: number;
     widgetFactories?: FmmWidgetFactory[];
