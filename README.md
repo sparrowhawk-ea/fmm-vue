@@ -10,91 +10,46 @@ npm install --save @eafmm/vue
 ```
 
 ## Adding Form Minimap
-Before
+The code sample below shows the lines added to a simple form to add a minimap (M) or a minimap with panel (P)
 ```html
-<script>
-    export default {
-        name: 'App'
-    }
-</script>
+        <script>
+M           import { FmmVueMinimap } from '@eafmm/vue'
+  P         import { FmmVueMinimap, FmmVuePanel } from '@eafmm/vue'
+            export default {
+                name: 'App',
+M P             components: {
+M P                 FmmVueMinimap,
+  P                 FmmVuePanel
+M P             },
+  P             data: () => ({
+  P                 refPanel: undefined
+  P             }),
+  P             mounted() {
+  P                 this.refPanel = this.$refs.panel;
+  P             }
+            }
+        </script>
 
-<template>
-    <div id="app">
-        <form>
-            <input id="Input1"/><br/>
-            <input id="Input2"/><br/>
-            <input id="Input3"/><br/>
-            <input id="Input4"/>
-        </form>
-    </div>
-</template>
-```
-After without panel
-```html
-<script>
-    import { FmmVueMinimap } from '@eafmm/vue'
-    export default {
-        name: 'App',
-        components: {
-            FmmVueMinimap
-        }
-    }
-</script>
+M P     <style>
+M P         .fmm-frame { height: 50px; }
+  P         .fmm-panel { height: 0; }
+M P     </style>
 
-<style>
-    .fmm-frame { height: 50px; }
-</style>
-
-<template>
-    <div id="app">
-        <div ref='parent' style='width:70px; height:50px; margin-left:200px'></div>
-        <form>
-            <FmmVueMinimap :parent='this.$refs.parent' title='Title'/>
-            <input id="Input1"/><br/>
-            <input id="Input2"/><br/>
-            <input id="Input3"/><br/>
-            <input id="Input4"/>
-        </form>
-    </div>
-</template>
-```
-After with panel
-```html
-<script>
-    import { FmmVueMinimap, FmmVuePanel } from '@eafmm/vue'
-    export default {
-        name: 'App',
-        components: {
-            FmmVueMinimap,
-            FmmVuePanel
-        },
-        data: () => ({
-            refPanel: undefined
-        }),
-        mounted() {
-            this.refPanel = this.$refs.panel;
-        }
-    }
-</script>
-
-<style>
-    .fmm-frame { height: 50px; }
-    .fmm-panel { height: 0; }
-</style>
-
-<template>
-    <div id="app">
-        <div ref='anchor' style='width:20px; height:20px; margin-left:200px'></div>
-        <FmmVuePanel ref='panel'/>
-        <form>
-            <FmmVueMinimap v-if='refPanel' :anchor='this.$refs.anchor' :panel='refPanel' title='Title'/>
-            <input id="Input1"/><br/>
-            <input id="Input2"/><br/>
-            <input id="Input3"/><br/>
-            <input id="Input4"/>
-        </form>
-    </div>
-</template>
+        <template>
+            <div id="app">
+M               <div ref='parent' style='width:70px; height:50px; margin-left:200px'></div>
+  P             <div ref='anchor' style='width:20px; height:20px; margin-left:200px'></div>
+  P             <FmmVuePanel ref='panel'/>
+                <form>
+M                   <FmmVueMinimap :parent='this.$refs.parent' title='Title'/>
+  P                 <FmmVueMinimap v-if='refPanel' :anchor='this.$refs.anchor' :panel='refPanel' title='Title'/>
+                    <input id="Input1"/><br/>
+                    <input id="Input2"/><br/>
+                    <input id="Input3"/><br/>
+                    <input id="Input4"/>
+                </form>
+            </div>
+        </template>
 ```
 
 ***
