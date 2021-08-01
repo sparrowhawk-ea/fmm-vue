@@ -1,5 +1,5 @@
 # Form Minimap Vue
-Vue components for [Form Minimap](https://github.com/sparrowhawk-ea/fmm-core).
+Vue components for [Form Minimap](https://www.npmjs.com/package/@eafmm/core).
 Please consult that documentation for further information on the concepts mentioned below.
 
 ***
@@ -55,63 +55,63 @@ M                   <FmmVueMinimap :parent='this.$refs.parent' title='Title'/>
 ***
 # API
 ## FmmVueMinimap
-Component to create and manage [FmmMinimap](https://github.com/sparrowhawk-ea/fmm-core#fmmminimap).
+Component to create and manage [FmmMinimap](https://www.npmjs.com/package/@eafmm/core#fmmminimap).
 The minimap is detached when this component is unmounted.
 For minimaps in a panel, use the panelproperty; otherwise use the parent property to show an always-visible minimap, or anchor for a popup minimap.
 
 Property | Type | Required
 --- | --- | :---:
-[aggregateLabels](https://github.com/sparrowhawk-ea/fmm-core#mcp-aggregatelabels) | [FmmMapString](https://github.com/sparrowhawk-ea/fmm-core#fmmmapstring)
-[anchor](https://github.com/sparrowhawk-ea/fmm-core#mcp-anchor) | HTMLElement
-[customWidgetIds](https://github.com/sparrowhawk-ea/fmm-core#mm-compose-customwidgetids) | string[]
-[debounceMsec](https://github.com/sparrowhawk-ea/fmm-core#mcp-debouncemsec) | Number
-[dynamicLabels](https://github.com/sparrowhawk-ea/fmm-core#mcp-dynamiclabels) | string[]
-[framework](https://github.com/sparrowhawk-ea/fmm-core#mcp-framework) | [FmmFramework](https://github.com/sparrowhawk-ea/fmm-core#fmmframework)
-[page](https://github.com/sparrowhawk-ea/fmm-core#mcp-page) | HTMLElement
+[aggregateLabels](https://www.npmjs.com/package/@eafmm/core#mcp-aggregatelabels) | [FmmMapString](https://www.npmjs.com/package/@eafmm/core#fmmmapstring)
+[anchor](https://www.npmjs.com/package/@eafmm/core#mcp-anchor) | HTMLElement
+[customWidgetIds](https://www.npmjs.com/package/@eafmm/core#mm-compose-customwidgetids) | string[]
+[debounceMsec](https://www.npmjs.com/package/@eafmm/core#mcp-debouncemsec) | Number
+[dynamicLabels](https://www.npmjs.com/package/@eafmm/core#mcp-dynamiclabels) | string[]
+[framework](https://www.npmjs.com/package/@eafmm/core#mcp-framework) | [FmmFramework](https://www.npmjs.com/package/@eafmm/core#fmmframework)
+[page](https://www.npmjs.com/package/@eafmm/core#mcp-page) | HTMLElement
 panel | [FmmVuePanel](#fmmvuepanel)
-[parent](https://github.com/sparrowhawk-ea/fmm-core#pcm-parent) | HTMLElement
-[store](https://github.com/sparrowhawk-ea/fmm-core#mcp-store) | [FmmVueStore](#fmmvuestore)
-[title](https://github.com/sparrowhawk-ea/fmm-core#mcp-title) | String | &check;
-[usePanelDetail](https://github.com/sparrowhawk-ea/fmm-core#mcp-usepaneldetail) | Boolean
-[useWidthToScale](https://github.com/sparrowhawk-ea/fmm-core#mcp-usewidthtoscale) | Boolean
-[verbosity](https://github.com/sparrowhawk-ea/fmm-core#mcp-verbosity) | Number
-[widgetFactories](https://github.com/sparrowhawk-ea/fmm-core#mcp-widgetfactories) | [FmmWidgetFactory](https://github.com/sparrowhawk-ea/fmm-core#fmmwidgetfactory)[]
+[parent](https://www.npmjs.com/package/@eafmm/core#pcm-parent) | HTMLElement
+[store](https://www.npmjs.com/package/@eafmm/core#mcp-store) | [FmmVueStore](#fmmvuestore)
+[title](https://www.npmjs.com/package/@eafmm/core#mcp-title) | String | &check;
+[usePanelDetail](https://www.npmjs.com/package/@eafmm/core#mcp-usepaneldetail) | Boolean
+[useWidthToScale](https://www.npmjs.com/package/@eafmm/core#mcp-usewidthtoscale) | Boolean
+[verbosity](https://www.npmjs.com/package/@eafmm/core#mcp-verbosity) | Number
+[widgetFactories](https://www.npmjs.com/package/@eafmm/core#mcp-widgetfactories) | [FmmWidgetFactory](https://www.npmjs.com/package/@eafmm/core#fmmwidgetfactory)[]
 
 Event | Parameter | Description
 --- | --- | ---
-update | [FmmMinimapSnapshot](https://github.com/sparrowhawk-ea/fmm-core#fmmminimapsnapshot) | Dispatched when the minimap updates itself for whatever reason.
+update | [FmmMinimapSnapshot](https://www.npmjs.com/package/@eafmm/core#fmmminimapsnapshot) | Dispatched when the minimap updates itself for whatever reason.
 
 | Method
 | ---
-| [destructor](https://github.com/sparrowhawk-ea/fmm-core#mm-destructor)
-| [takeSnapshot](https://github.com/sparrowhawk-ea/fmm-core#mm-takesnapshot)
+| [destructor](https://www.npmjs.com/package/@eafmm/core#mm-destructor)
+| [takeSnapshot](https://www.npmjs.com/package/@eafmm/core#mm-takesnapshot)
 
 ***
 ## FmmVuePanel
-Component to create and manage [FmmPanel](https://github.com/sparrowhawk-ea/fmm-core#fmmpanel).
+Component to create and manage [FmmPanel](https://www.npmjs.com/package/@eafmm/core#fmmpanel).
 
 Property | Type | Required
 --- | --- | :---:
-[detailParent](https://github.com/sparrowhawk-ea/fmm-core#pcp-detailparent) | HTMLDivElements
-[vertical](https://github.com/sparrowhawk-ea/fmm-core#pcp-vertical) | boolean
+[detailParent](https://www.npmjs.com/package/@eafmm/core#pcp-detailparent) | HTMLDivElements
+[vertical](https://www.npmjs.com/package/@eafmm/core#pcp-vertical) | boolean
 
 | Method
 | ---
-| [destroyDetached](https://github.com/sparrowhawk-ea/fmm-core#pm-destroydetached)
+| [destroyDetached](https://www.npmjs.com/package/@eafmm/core#pm-destroydetached)
 
 ***
 ## FmmVueStore
-Component to create [FmmStore](https://github.com/sparrowhawk-ea/fmm-core#fmmstore).
+Component to create [FmmStore](https://www.npmjs.com/package/@eafmm/core#fmmstore).
 
 Property | Type | Required
 --- | --- | :---:
-[errors](https://github.com/sparrowhawk-ea/fmm-core#scp-errors) | [FmmMapErrors](https://github.com/sparrowhawk-ea/fmm-core#fmmmaperrors)
-[values](https://github.com/sparrowhawk-ea/fmm-core#scp-values) | [FmmMapValues](https://github.com/sparrowhawk-ea/fmm-core#fmmmapvalues) | &check;
+[errors](https://www.npmjs.com/package/@eafmm/core#scp-errors) | [FmmMapErrors](https://www.npmjs.com/package/@eafmm/core#fmmmaperrors)
+[values](https://www.npmjs.com/package/@eafmm/core#scp-values) | [FmmMapValues](https://www.npmjs.com/package/@eafmm/core#fmmmapvalues) | &check;
 
 ***
 ## FmmVuex
-Component to create [FmmStore](https://github.com/sparrowhawk-ea/fmm-core#fmmstore) when using Vuex.
+Component to create [FmmStore](https://www.npmjs.com/package/@eafmm/core#fmmstore) when using Vuex.
 
 Property | Type | Required
 --- | --- | :---:
-[errors](https://github.com/sparrowhawk-ea/fmm-core#scp-errors) | [FmmMapErrors](https://github.com/sparrowhawk-ea/fmm-core#fmmmaperrors)
+[errors](https://www.npmjs.com/package/@eafmm/core#scp-errors) | [FmmMapErrors](https://www.npmjs.com/package/@eafmm/core#fmmmaperrors)
