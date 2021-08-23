@@ -75,7 +75,7 @@ panel | [FmmVuePanel](#fmmvuepanel)
 [usePanelDetail](https://www.npmjs.com/package/@eafmm/core#mcp-usepaneldetail) | Boolean
 [useWidthToScale](https://www.npmjs.com/package/@eafmm/core#mcp-usewidthtoscale) | Boolean
 [verbosity](https://www.npmjs.com/package/@eafmm/core#mcp-verbosity) | Number
-[zoomMaxPercent](https://www.npmjs.com/package/@eafmm/core#mcp-zoommaxpercent) | Number
+[zoomFactor](https://www.npmjs.com/package/@eafmm/core#mcp-zoomfactor) | Number
 
 Event | Parameter | Description
 --- | --- | ---
