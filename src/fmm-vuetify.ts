@@ -73,7 +73,7 @@ class FrameworkItem implements FmmFrameworkItem {
 // =================================================================================================================================
 class FrameworkItemSelect extends FrameworkItem {
 	// =============================================================================================================================
-	public getValue(_: string, e: HTMLElement, _n: HTMLElement, _l: string): string {
+	public getValue(_: string, e: FmmFormElementHTML, _n: FmmFormElementHTML, _l: string): string {
 		return e.parentElement.textContent;
 	}
 }
