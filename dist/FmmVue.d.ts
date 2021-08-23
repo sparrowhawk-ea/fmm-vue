@@ -1,26 +1,26 @@
 import { ComponentPublicInstance, PropType } from 'vue';
-import { FmmFramework, FmmMapErrors, FmmMapStore, FmmMapString, FmmMapValues, FmmStore, FmmWidgetFactory } from '@eafmm/core';
+import { FmmFramework, FmmMapString, FmmStore, FmmStoreErrors, FmmStoreImpl, FmmStoreValues } from '@eafmm/core';
 export declare const FmmVueMinimap: import("vue").DefineComponent<{
     aggregateLabels: PropType<FmmMapString>;
     anchor: {
-        new (): HTMLElement;
-        prototype: HTMLElement;
+        new (): HTMLDivElement;
+        prototype: HTMLDivElement;
     };
-    customWidgetIds: PropType<string[]>;
+    customElementIds: PropType<string[]>;
     debounceMsec: NumberConstructor;
     dynamicLabels: PropType<string[]>;
     framework: PropType<FmmFramework>;
     page: {
-        new (): HTMLElement;
-        prototype: HTMLElement;
+        new (): HTMLDivElement;
+        prototype: HTMLDivElement;
     };
     panel: {
         type: PropType<ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>>;
         validator: (value: ComponentPublicInstance) => boolean;
     };
     parent: {
-        new (): HTMLElement;
-        prototype: HTMLElement;
+        new (): HTMLDivElement;
+        prototype: HTMLDivElement;
     };
     store: PropType<FmmStore>;
     title: {
@@ -31,14 +31,14 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
     usePanelDetail: BooleanConstructor;
     useWidthToScale: BooleanConstructor;
     verbosity: NumberConstructor;
-    widgetFactories: PropType<FmmWidgetFactory[]>;
+    zoomFactor: NumberConstructor;
 }, unknown, unknown, {}, {
     destructor(): void;
     takeSnapshot(): boolean;
 }, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
     aggregateLabels?: unknown;
     anchor?: unknown;
-    customWidgetIds?: unknown;
+    customElementIds?: unknown;
     debounceMsec?: unknown;
     dynamicLabels?: unknown;
     framework?: unknown;
@@ -50,16 +50,16 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
     usePanelDetail?: unknown;
     useWidthToScale?: unknown;
     verbosity?: unknown;
-    widgetFactories?: unknown;
+    zoomFactor?: unknown;
 } & {
     title: string;
     usePanelDetail: boolean;
     useWidthToScale: boolean;
 } & {
-    anchor?: HTMLElement;
-    page?: HTMLElement;
+    anchor?: HTMLDivElement;
+    page?: HTMLDivElement;
     aggregateLabels?: FmmMapString;
-    customWidgetIds?: string[];
+    customElementIds?: string[];
     debounceMsec?: number;
     dynamicLabels?: string[];
     framework?: FmmFramework;
@@ -97,15 +97,15 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
             renderTriggered?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
             errorCaptured?: ((err: unknown, instance: ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>, info: string) => boolean | void) | ((err: unknown, instance: ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>, info: string) => boolean | void)[];
         };
-        $forceUpdate: import("vue").ReactiveEffect<any>;
+        $forceUpdate: () => void;
         $nextTick: typeof import("vue").nextTick;
         $watch(source: string | Function, cb: Function, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
     };
-    parent?: HTMLElement;
+    parent?: HTMLDivElement;
     store?: FmmStore;
     verbosity?: number;
-    widgetFactories?: FmmWidgetFactory[];
-}>, {
+    zoomFactor?: number;
+}> & {}, {
     usePanelDetail: boolean;
     useWidthToScale: boolean;
 }>;
@@ -124,33 +124,37 @@ export declare const FmmVuePanel: import("vue").DefineComponent<{
     vertical: boolean;
 } & {
     detailParent?: HTMLDivElement;
-}>, {
+}> & {}, {
     vertical: boolean;
 }>;
 export declare const FmmVueStore: import("vue").DefineComponent<{
-    errors: PropType<FmmMapErrors>;
+    errors: PropType<FmmStoreErrors>;
     values: {
         required: true;
-        type: PropType<FmmMapValues>;
+        type: PropType<FmmStoreValues>;
     };
 }, unknown, {
-    store: FmmMapStore<FmmMapValues, FmmMapErrors>;
+    store: FmmStoreImpl<FmmStoreValues, FmmStoreErrors>;
 }, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "store"[], "store", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
     errors?: unknown;
     values?: unknown;
 } & {
-    values: FmmMapValues;
+    values: FmmStoreValues;
 } & {
-    errors?: FmmMapErrors;
-}>, {}>;
+    errors?: FmmStoreErrors;
+}> & {
+    onStore?: (...args: any[]) => any;
+}, {}>;
 export declare const FmmVuex: import("vue").DefineComponent<{
-    errors: PropType<FmmMapErrors>;
+    errors: PropType<FmmStoreErrors>;
 }, unknown, {
     $store: any;
     unsubscribeToStore: () => void;
-    store: FmmMapStore<FmmMapValues, FmmMapErrors>;
+    store: FmmStoreImpl<FmmStoreValues, FmmStoreErrors>;
 }, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "store"[], "store", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
     errors?: unknown;
 } & {} & {
-    errors?: FmmMapErrors;
-}>, {}>;
+    errors?: FmmStoreErrors;
+}> & {
+    onStore?: (...args: any[]) => any;
+}, {}>;

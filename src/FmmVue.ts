@@ -1,17 +1,17 @@
 import { Component, ComponentPublicInstance, PropType, VNode, defineComponent, h } from 'vue';
 import {
 	Fmm,
+	FmmFormHTML,
 	FmmFramework,
-	FmmMapErrors,
-	FmmMapStore,
 	FmmMapString,
-	FmmMapValues,
 	FmmMinimap,
 	FmmMinimapCreateParam,
-	FmmMinimapSnapshot,
 	FmmPanel,
+	FmmSnapshots,
 	FmmStore,
-	FmmWidgetFactory
+	FmmStoreErrors,
+	FmmStoreImpl,
+	FmmStoreValues
 } from '@eafmm/core';
 
 // =================================================================================================================================
@@ -19,7 +19,7 @@ import {
 // =================================================================================================================================
 export const FmmVueMinimap = defineComponent({
 	// =============================================================================================================================
-//	emits: ['update'],
+	//	emits: ['update'],
 
 	// =============================================================================================================================
 	methods: {
@@ -42,22 +42,21 @@ export const FmmVueMinimap = defineComponent({
 			anchor: this.anchor,
 			debounceMsec: this.debounceMsec,
 			dynamicLabels: this.dynamicLabels,
-			form: form as HTMLFormElement,
+			form: new FmmFormHTML(form as HTMLFormElement, this.page),
 			framework: this.framework,
-			onUpdate: (snapshot: Readonly<FmmMinimapSnapshot>) => this.$emit('update', snapshot),
-			page: this.page,
+			onUpdate: (snapshot: Readonly<FmmSnapshots>) => this.$emit('update', snapshot),
 			store: this.store,
 			title: this.title,
 			usePanelDetail: this.usePanelDetail,
 			useWidthToScale: this.useWidthToScale,
 			verbosity: this.verbosity,
-			widgetFactories: this.widgetFactories
+			zoomFactor: this.zoomFactor
 		};
-		const minimap = this.panel? G.PANELS.get(this.panel)?.createMinimap(fmcp): Fmm.createMinimap(fmcp, this.parent);
+		const minimap = this.panel ? G.PANELS.get(this.panel)?.createMinimap(fmcp) : Fmm.createMinimap(fmcp, this.parent);
 		if (!minimap) return;
 		G.MINIMAPS.set(this, minimap);
-		minimap.compose(this.customWidgetIds);
-		this.$watch('customWidgetIds', (ids: string[]) => minimap.compose(ids));
+		minimap.compose(this.customElementIds);
+		this.$watch('customElementIds', (ids: string[]) => minimap.compose(ids));
 	},
 
 	// =============================================================================================================================
@@ -66,17 +65,17 @@ export const FmmVueMinimap = defineComponent({
 	// =============================================================================================================================
 	props: {
 		aggregateLabels: Object as PropType<FmmMapString>,
-		anchor: HTMLElement,
-		customWidgetIds: Array as PropType<string[]>,
+		anchor: HTMLDivElement,
+		customElementIds: Array as PropType<string[]>,
 		debounceMsec: Number,
 		dynamicLabels: Array as PropType<string[]>,
 		framework: Object as PropType<FmmFramework>,
-		page: HTMLElement,
+		page: HTMLDivElement,
 		panel: {
 			type: Object as PropType<ComponentPublicInstance>,
 			validator: (value: ComponentPublicInstance) => value.$options.name === 'FmmVuePanel'
 		},
-		parent: HTMLElement,
+		parent: HTMLDivElement,
 		store: Object as PropType<FmmStore>,
 		title: {
 			required: true,
@@ -86,7 +85,7 @@ export const FmmVueMinimap = defineComponent({
 		usePanelDetail: Boolean,
 		useWidthToScale: Boolean,
 		verbosity: Number,
-		widgetFactories: Array as PropType<FmmWidgetFactory[]>
+		zoomFactor: Number
 	},
 
 	// =============================================================================================================================
@@ -120,7 +119,7 @@ export const FmmVuePanel = defineComponent({
 	// =============================================================================================================================
 	mounted() {
 		if (Object.keys(this.$slots).length) throw new Error('FmmVuePanel is a contentless tag');
-		G.PANELS.set(this, Fmm.createPanel(this.$el as HTMLElement, this.detailParent, this.vertical));
+		G.PANELS.set(this, Fmm.createPanel(this.$el as HTMLDivElement, this.detailParent, this.vertical));
 	},
 
 	// =============================================================================================================================
@@ -160,7 +159,7 @@ export const FmmVueStore = defineComponent({
 	// =============================================================================================================================
 	data() {
 		return {
-			store: undefined as FmmMapStore<FmmMapValues, FmmMapErrors>
+			store: undefined as FmmStoreImpl<FmmStoreValues, FmmStoreErrors>
 		};
 	},
 
@@ -170,7 +169,7 @@ export const FmmVueStore = defineComponent({
 	// =============================================================================================================================
 	mounted() {
 		if (Object.keys(this.$slots).length) throw new Error('FmmVueStore is a contentless tag');
-		this.$emit('store', (this.store = new FmmMapStore(this.values, this.errors)));
+		this.$emit('store', (this.store = new FmmStoreImpl(this.values, this.errors)));
 	},
 
 	// =============================================================================================================================
@@ -178,10 +177,10 @@ export const FmmVueStore = defineComponent({
 
 	// =============================================================================================================================
 	props: {
-		errors: Object as PropType<FmmMapErrors>,
+		errors: Object as PropType<FmmStoreErrors>,
 		values: {
 			required: true,
-			type: Object as PropType<FmmMapValues>
+			type: Object as PropType<FmmStoreValues>
 		}
 	},
 
@@ -208,7 +207,7 @@ export const FmmVuex = defineComponent({
 		return {
 			$store: undefined as any, // to placate typescript compiler
 			unsubscribeToStore: undefined as () => void,
-			store: undefined as FmmMapStore<FmmMapValues, FmmMapErrors>
+			store: undefined as FmmStoreImpl<FmmStoreValues, FmmStoreErrors>
 		};
 	},
 
@@ -218,8 +217,8 @@ export const FmmVuex = defineComponent({
 	// =============================================================================================================================
 	mounted() {
 		if (Object.keys(this.$slots).length) throw new Error('FmmVuex is a contentless tag');
-		this.$emit('store', (this.store = new FmmMapStore(this.$store.state, this.errors)));
-		this.unsubscribeToStore = this.$store.subscribe((_: unknown, state: FmmMapValues) => this.store.update(state, this.errors));
+		this.$emit('store', (this.store = new FmmStoreImpl(this.$store.state, this.errors)));
+		this.unsubscribeToStore = this.$store.subscribe((_: unknown, state: FmmStoreValues) => this.store.update(state, this.errors));
 	},
 
 	// =============================================================================================================================
@@ -227,7 +226,7 @@ export const FmmVuex = defineComponent({
 
 	// =============================================================================================================================
 	props: {
-		errors: Object as PropType<FmmMapErrors>
+		errors: Object as PropType<FmmStoreErrors>
 	},
 
 	// =============================================================================================================================

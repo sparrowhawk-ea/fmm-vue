@@ -1,5 +1,5 @@
 import { defineComponent, h } from 'vue';
-import { Fmm, FmmMapStore } from '@eafmm/core';
+import { Fmm, FmmFormHTML, FmmStoreImpl } from '@eafmm/core';
 // =================================================================================================================================
 //						F M M V U E M I N I M A P
 // =================================================================================================================================
@@ -33,40 +33,39 @@ export var FmmVueMinimap = defineComponent({
             anchor: this.anchor,
             debounceMsec: this.debounceMsec,
             dynamicLabels: this.dynamicLabels,
-            form: form,
+            form: new FmmFormHTML(form, this.page),
             framework: this.framework,
             onUpdate: function (snapshot) { return _this.$emit('update', snapshot); },
-            page: this.page,
             store: this.store,
             title: this.title,
             usePanelDetail: this.usePanelDetail,
             useWidthToScale: this.useWidthToScale,
             verbosity: this.verbosity,
-            widgetFactories: this.widgetFactories
+            zoomFactor: this.zoomFactor
         };
         var minimap = this.panel ? (_b = G.PANELS.get(this.panel)) === null || _b === void 0 ? void 0 : _b.createMinimap(fmcp) : Fmm.createMinimap(fmcp, this.parent);
         if (!minimap)
             return;
         G.MINIMAPS.set(this, minimap);
-        minimap.compose(this.customWidgetIds);
-        this.$watch('customWidgetIds', function (ids) { return minimap.compose(ids); });
+        minimap.compose(this.customElementIds);
+        this.$watch('customElementIds', function (ids) { return minimap.compose(ids); });
     },
     // =============================================================================================================================
     name: 'FmmVueMinimap',
     // =============================================================================================================================
     props: {
         aggregateLabels: Object,
-        anchor: HTMLElement,
-        customWidgetIds: Array,
+        anchor: HTMLDivElement,
+        customElementIds: Array,
         debounceMsec: Number,
         dynamicLabels: Array,
         framework: Object,
-        page: HTMLElement,
+        page: HTMLDivElement,
         panel: {
             type: Object,
             validator: function (value) { return value.$options.name === 'FmmVuePanel'; }
         },
-        parent: HTMLElement,
+        parent: HTMLDivElement,
         store: Object,
         title: {
             required: true,
@@ -76,7 +75,7 @@ export var FmmVueMinimap = defineComponent({
         usePanelDetail: Boolean,
         useWidthToScale: Boolean,
         verbosity: Number,
-        widgetFactories: Array
+        zoomFactor: Number
     },
     // =============================================================================================================================
     render: function () { return h('div'); },
@@ -151,7 +150,7 @@ export var FmmVueStore = defineComponent({
     mounted: function () {
         if (Object.keys(this.$slots).length)
             throw new Error('FmmVueStore is a contentless tag');
-        this.$emit('store', (this.store = new FmmMapStore(this.values, this.errors)));
+        this.$emit('store', (this.store = new FmmStoreImpl(this.values, this.errors)));
     },
     // =============================================================================================================================
     name: 'FmmVueStore',
@@ -194,7 +193,7 @@ export var FmmVuex = defineComponent({
         var _this = this;
         if (Object.keys(this.$slots).length)
             throw new Error('FmmVuex is a contentless tag');
-        this.$emit('store', (this.store = new FmmMapStore(this.$store.state, this.errors)));
+        this.$emit('store', (this.store = new FmmStoreImpl(this.$store.state, this.errors)));
         this.unsubscribeToStore = this.$store.subscribe(function (_, state) { return _this.store.update(state, _this.errors); });
     },
     // =============================================================================================================================

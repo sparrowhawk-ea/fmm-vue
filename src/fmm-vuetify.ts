@@ -1,10 +1,10 @@
-import { FmmFramework, FmmFrameworkItem } from '@eafmm/core';
+import { FmmFormElementHTML, FmmFramework, FmmFrameworkItem } from '@eafmm/core';
 
 // =================================================================================================================================
 //						F M M V U E T I F Y
 // =================================================================================================================================
 export const FmmVuetify: FmmFramework = {
-	createFrameworkItem(_: string, e: HTMLElement): FmmFrameworkItem {
+	createFrameworkItem(_: string, e: FmmFormElementHTML): FmmFrameworkItem {
 		return e.parentElement?.classList.contains('v-select__selections') ? new FrameworkItemSelect(e) : new FrameworkItem(e);
 	}
 };
@@ -48,22 +48,22 @@ class FrameworkItem implements FmmFrameworkItem {
 	}
 
 	// =============================================================================================================================
-	public getEnvelope(_: string, _e: HTMLElement, _l: HTMLElement) {
+	public getEnvelope(_: string, _e: FmmFormElementHTML, _l: FmmFormElementHTML) {
 		return this.envelope;
 	}
 
 	// =============================================================================================================================
-	public getError(_: string, _e: HTMLElement, _n: HTMLElement, _v: boolean) {
+	public getError(_: string, _e: FmmFormElementHTML, _n: FmmFormElementHTML, _v: boolean) {
 		return this.forValidation.querySelector('DIV.v-messages__message')?.textContent;
 	}
 
 	// =============================================================================================================================
-	public getLabel(_: string, _e: HTMLElement) {
+	public getLabel(_: string, _e: FmmFormElementHTML) {
 		return this.label;
 	}
 
 	// =============================================================================================================================
-	public getValue(_: string, _e: HTMLElement, _n: HTMLElement, _l: string): string {
+	public getValue(_: string, _e: FmmFormElementHTML, _n: FmmFormElementHTML, _l: string): string {
 		return undefined;
 	}
 }

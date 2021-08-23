@@ -63,11 +63,11 @@ Property | Type | Required
 --- | --- | :---:
 [aggregateLabels](https://www.npmjs.com/package/@eafmm/core#mcp-aggregatelabels) | [FmmMapString](https://www.npmjs.com/package/@eafmm/core#fmmmapstring)
 [anchor](https://www.npmjs.com/package/@eafmm/core#mcp-anchor) | HTMLElement
-[customWidgetIds](https://www.npmjs.com/package/@eafmm/core#mm-compose-customwidgetids) | string[]
+[customElementIds](https://www.npmjs.com/package/@eafmm/core#mm-compose-customelementids) | string[]
 [debounceMsec](https://www.npmjs.com/package/@eafmm/core#mcp-debouncemsec) | Number
 [dynamicLabels](https://www.npmjs.com/package/@eafmm/core#mcp-dynamiclabels) | string[]
 [framework](https://www.npmjs.com/package/@eafmm/core#mcp-framework) | [FmmFramework](https://www.npmjs.com/package/@eafmm/core#fmmframework)
-[page](https://www.npmjs.com/package/@eafmm/core#mcp-page) | HTMLElement
+[page](https://www.npmjs.com/package/@eafmm/core#fmmform-page) | HTMLElement
 panel | [FmmVuePanel](#fmmvuepanel)
 [parent](https://www.npmjs.com/package/@eafmm/core#pcm-parent) | HTMLElement
 [store](https://www.npmjs.com/package/@eafmm/core#mcp-store) | [FmmVueStore](#fmmvuestore)
@@ -75,7 +75,7 @@ panel | [FmmVuePanel](#fmmvuepanel)
 [usePanelDetail](https://www.npmjs.com/package/@eafmm/core#mcp-usepaneldetail) | Boolean
 [useWidthToScale](https://www.npmjs.com/package/@eafmm/core#mcp-usewidthtoscale) | Boolean
 [verbosity](https://www.npmjs.com/package/@eafmm/core#mcp-verbosity) | Number
-[widgetFactories](https://www.npmjs.com/package/@eafmm/core#mcp-widgetfactories) | [FmmWidgetFactory](https://www.npmjs.com/package/@eafmm/core#fmmwidgetfactory)[]
+[zoomMaxPercent](https://www.npmjs.com/package/@eafmm/core#mcp-zoommaxpercent) | Number
 
 Event | Parameter | Description
 --- | --- | ---
