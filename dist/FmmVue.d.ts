@@ -57,12 +57,9 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
     useWidthToScale: boolean;
 } & {
     anchor?: HTMLDivElement;
+    parent?: HTMLDivElement;
     page?: HTMLDivElement;
-    aggregateLabels?: FmmMapString;
-    customElementIds?: string[];
     debounceMsec?: number;
-    dynamicLabels?: string[];
-    framework?: FmmFramework;
     panel?: {
         $: import("vue").ComponentInternalInstance;
         $data: {};
@@ -101,11 +98,16 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
         $nextTick: typeof import("vue").nextTick;
         $watch(source: string | Function, cb: Function, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
     };
-    parent?: HTMLDivElement;
-    store?: FmmStore;
     verbosity?: number;
     zoomFactor?: number;
-}> & {}, {
+    aggregateLabels?: FmmMapString;
+    customElementIds?: string[];
+    dynamicLabels?: string[];
+    framework?: FmmFramework;
+    store?: FmmStore;
+}> & {
+    [x: string & `on${string}`]: never;
+}, {
     usePanelDetail: boolean;
     useWidthToScale: boolean;
 }>;
@@ -124,7 +126,9 @@ export declare const FmmVuePanel: import("vue").DefineComponent<{
     vertical: boolean;
 } & {
     detailParent?: HTMLDivElement;
-}> & {}, {
+}> & {
+    [x: string & `on${string}`]: never;
+}, {
     vertical: boolean;
 }>;
 export declare const FmmVueStore: import("vue").DefineComponent<{
