@@ -1,6 +1,7 @@
 import { defineComponent, h } from 'vue';
-import { Fmm, FmmFormHTML, FmmStoreImpl } from '@eafmm/core';
-export const FmmVueMinimap = defineComponent({
+import { FmmFormHTML, Fmm, FmmStoreImpl } from '@eafmm/core';
+
+const FmmVueMinimap = defineComponent({
     methods: {
         destructor() {
             var _a;
@@ -78,7 +79,7 @@ export const FmmVueMinimap = defineComponent({
         this.$nextTick(() => { var _a; return (_a = G.MINIMAPS.get(this)) === null || _a === void 0 ? void 0 : _a.takeSnapshot(); });
     }
 });
-export const FmmVuePanel = defineComponent({
+const FmmVuePanel = defineComponent({
     methods: {
         destroyDetached() {
             const panel = G.PANELS.get(this);
@@ -109,7 +110,7 @@ export const FmmVuePanel = defineComponent({
         G.PANELS.delete(this);
     }
 });
-export const FmmVueStore = defineComponent({
+const FmmVueStore = defineComponent({
     data() {
         return {
             store: undefined
@@ -141,7 +142,7 @@ export const FmmVueStore = defineComponent({
         }
     }
 });
-export const FmmVuex = defineComponent({
+const FmmVuex = defineComponent({
     data() {
         return {
             $store: undefined,
@@ -176,3 +177,56 @@ const G = {
     MINIMAPS: new WeakMap(),
     PANELS: new WeakMap()
 };
+
+const FmmVuetify = {
+    createFrameworkItem(_, e) {
+        var _a;
+        return ((_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.classList.contains('v-select__selections')) ? new FrameworkItemSelect(e) : new FrameworkItem(e);
+    }
+};
+class FrameworkItem {
+    constructor(e) {
+        const isRadio = e.tagName === 'INPUT' && e.type === 'radio';
+        let tag = e.parentElement;
+        const envelopeClass = isRadio ? 'v-radio' : 'v-input';
+        while (tag && !tag.classList.contains(envelopeClass))
+            tag = tag.parentElement;
+        if (!tag) {
+            this.envelope = this.forValidation = e;
+        }
+        else {
+            this.envelope = tag;
+            const labels = tag.querySelectorAll('LABEL');
+            if (labels.length === 1)
+                this.label = labels[0];
+            if (isRadio) {
+                while (tag && !tag.classList.contains('v-input--radio-group'))
+                    tag = tag.parentElement;
+            }
+            this.forValidation = tag || this.envelope;
+        }
+    }
+    destructor() {
+    }
+    getEnvelope(_, _e, _l) {
+        return this.envelope;
+    }
+    getError(_, _e, _n, _v) {
+        var _a;
+        return ((_a = this.forValidation.querySelector('DIV.v-messages__message')) === null || _a === void 0 ? void 0 : _a.textContent) || '';
+    }
+    getLabel(_, _e) {
+        return this.label;
+    }
+    getValue(_, _e, _n, _l) {
+        return '';
+    }
+}
+class FrameworkItemSelect extends FrameworkItem {
+    getValue(_, e, _n, _l) {
+        var _a;
+        return ((_a = e.parentElement) === null || _a === void 0 ? void 0 : _a.textContent) || '';
+    }
+}
+
+export { FmmVueMinimap, FmmVuePanel, FmmVueStore, FmmVuetify, FmmVuex };

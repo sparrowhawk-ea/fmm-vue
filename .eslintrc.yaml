@@ -24,7 +24,7 @@ overrides:
           - warn
           - arrowParens: avoid
             bracketSpacing: true
-            endOfLine: crlf
+            endOfLine: auto
             semi: true
             singleQuote: true
             trailingComma: none

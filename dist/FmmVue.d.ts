@@ -33,8 +33,8 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
     verbosity: NumberConstructor;
     zoomFactor: NumberConstructor;
 }, unknown, unknown, {}, {
-    destructor(): void;
-    takeSnapshot(): boolean;
+    destructor(): void | undefined;
+    takeSnapshot(): boolean | undefined;
 }, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
     aggregateLabels?: unknown;
     anchor?: unknown;
@@ -56,10 +56,10 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
     usePanelDetail: boolean;
     useWidthToScale: boolean;
 } & {
-    anchor?: HTMLDivElement;
-    parent?: HTMLDivElement;
-    page?: HTMLDivElement;
-    debounceMsec?: number;
+    anchor?: HTMLDivElement | undefined;
+    parent?: HTMLDivElement | undefined;
+    page?: HTMLDivElement | undefined;
+    debounceMsec?: number | undefined;
     panel?: {
         $: import("vue").ComponentInternalInstance;
         $data: {};
@@ -71,43 +71,41 @@ export declare const FmmVueMinimap: import("vue").DefineComponent<{
             [x: string]: unknown;
         };
         $slots: Readonly<{
-            [name: string]: import("vue").Slot;
+            [name: string]: import("vue").Slot | undefined;
         }>;
-        $root: ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>;
-        $parent: ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>;
+        $root: ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>> | null;
+        $parent: ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>> | null;
         $emit: (event: string, ...args: any[]) => void;
         $el: any;
         $options: import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}> & {
-            beforeCreate?: (() => void) | (() => void)[];
-            created?: (() => void) | (() => void)[];
-            beforeMount?: (() => void) | (() => void)[];
-            mounted?: (() => void) | (() => void)[];
-            beforeUpdate?: (() => void) | (() => void)[];
-            updated?: (() => void) | (() => void)[];
-            activated?: (() => void) | (() => void)[];
-            deactivated?: (() => void) | (() => void)[];
-            beforeDestroy?: (() => void) | (() => void)[];
-            beforeUnmount?: (() => void) | (() => void)[];
-            destroyed?: (() => void) | (() => void)[];
-            unmounted?: (() => void) | (() => void)[];
-            renderTracked?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
-            renderTriggered?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
-            errorCaptured?: ((err: unknown, instance: ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>, info: string) => boolean | void) | ((err: unknown, instance: ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>, info: string) => boolean | void)[];
+            beforeCreate?: ((() => void) | (() => void)[]) | undefined;
+            created?: ((() => void) | (() => void)[]) | undefined;
+            beforeMount?: ((() => void) | (() => void)[]) | undefined;
+            mounted?: ((() => void) | (() => void)[]) | undefined;
+            beforeUpdate?: ((() => void) | (() => void)[]) | undefined;
+            updated?: ((() => void) | (() => void)[]) | undefined;
+            activated?: ((() => void) | (() => void)[]) | undefined;
+            deactivated?: ((() => void) | (() => void)[]) | undefined;
+            beforeDestroy?: ((() => void) | (() => void)[]) | undefined;
+            beforeUnmount?: ((() => void) | (() => void)[]) | undefined;
+            destroyed?: ((() => void) | (() => void)[]) | undefined;
+            unmounted?: ((() => void) | (() => void)[]) | undefined;
+            renderTracked?: (((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[]) | undefined;
+            renderTriggered?: (((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[]) | undefined;
+            errorCaptured?: (((err: unknown, instance: ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>> | null, info: string) => boolean | void) | ((err: unknown, instance: ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>> | null, info: string) => boolean | void)[]) | undefined;
         };
         $forceUpdate: () => void;
         $nextTick: typeof import("vue").nextTick;
-        $watch(source: string | Function, cb: Function, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
-    };
-    verbosity?: number;
-    zoomFactor?: number;
-    aggregateLabels?: FmmMapString;
-    customElementIds?: string[];
-    dynamicLabels?: string[];
-    framework?: FmmFramework;
-    store?: FmmStore;
-}> & {
-    [x: string & `on${string}`]: never;
-}, {
+        $watch(source: string | Function, cb: Function, options?: import("vue").WatchOptions<boolean> | undefined): import("vue").WatchStopHandle;
+    } | undefined;
+    verbosity?: number | undefined;
+    zoomFactor?: number | undefined;
+    aggregateLabels?: FmmMapString | undefined;
+    customElementIds?: string[] | undefined;
+    dynamicLabels?: string[] | undefined;
+    framework?: FmmFramework | undefined;
+    store?: FmmStore | undefined;
+}>, {
     usePanelDetail: boolean;
     useWidthToScale: boolean;
 }>;
@@ -125,10 +123,8 @@ export declare const FmmVuePanel: import("vue").DefineComponent<{
 } & {
     vertical: boolean;
 } & {
-    detailParent?: HTMLDivElement;
-}> & {
-    [x: string & `on${string}`]: never;
-}, {
+    detailParent?: HTMLDivElement | undefined;
+}>, {
     vertical: boolean;
 }>;
 export declare const FmmVueStore: import("vue").DefineComponent<{
@@ -145,9 +141,9 @@ export declare const FmmVueStore: import("vue").DefineComponent<{
 } & {
     values: FmmStoreValues;
 } & {
-    errors?: FmmStoreErrors;
+    errors?: FmmStoreErrors | undefined;
 }> & {
-    onStore?: (...args: any[]) => any;
+    onStore?: ((...args: any[]) => any) | undefined;
 }, {}>;
 export declare const FmmVuex: import("vue").DefineComponent<{
     errors: PropType<FmmStoreErrors>;
@@ -158,7 +154,7 @@ export declare const FmmVuex: import("vue").DefineComponent<{
 }, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "store"[], "store", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
     errors?: unknown;
 } & {} & {
-    errors?: FmmStoreErrors;
+    errors?: FmmStoreErrors | undefined;
 }> & {
-    onStore?: (...args: any[]) => any;
+    onStore?: ((...args: any[]) => any) | undefined;
 }, {}>;

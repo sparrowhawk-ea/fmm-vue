@@ -21,7 +21,7 @@ export const FmmVuetify: FmmFramework = {
 class FrameworkItem implements FmmFrameworkItem {
 	private readonly envelope: HTMLElement;
 	private readonly forValidation: HTMLElement;
-	private readonly label: HTMLElement;
+	private readonly label?: HTMLElement;
 
 	// =============================================================================================================================
 	public constructor(e: HTMLElement) {
@@ -54,17 +54,17 @@ class FrameworkItem implements FmmFrameworkItem {
 
 	// =============================================================================================================================
 	public getError(_: string, _e: FmmFormElementHTML, _n: FmmFormElementHTML, _v: boolean) {
-		return this.forValidation.querySelector('DIV.v-messages__message')?.textContent;
+		return this.forValidation.querySelector('DIV.v-messages__message')?.textContent || '';
 	}
 
 	// =============================================================================================================================
 	public getLabel(_: string, _e: FmmFormElementHTML) {
-		return this.label;
+		return this.label as HTMLElement;
 	}
 
 	// =============================================================================================================================
 	public getValue(_: string, _e: FmmFormElementHTML, _n: FmmFormElementHTML, _l: string): string {
-		return undefined;
+		return '';
 	}
 }
 
@@ -73,7 +73,7 @@ class FrameworkItem implements FmmFrameworkItem {
 // =================================================================================================================================
 class FrameworkItemSelect extends FrameworkItem {
 	// =============================================================================================================================
-	public getValue(_: string, e: FmmFormElementHTML, _n: FmmFormElementHTML, _l: string): string {
-		return e.parentElement.textContent;
+	public getValue(_: string, e: FmmFormElementHTML, _n: FmmFormElementHTML, _l: string) {
+		return e.parentElement?.textContent || '';
 	}
 }

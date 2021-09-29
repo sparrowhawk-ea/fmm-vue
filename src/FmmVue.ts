@@ -1,4 +1,4 @@
-import { Component, ComponentPublicInstance, PropType, VNode, defineComponent, h } from 'vue';
+import { Component, ComponentPublicInstance, PropType, defineComponent, h } from 'vue';
 import {
 	Fmm,
 	FmmFormHTML,
@@ -159,7 +159,7 @@ export const FmmVueStore = defineComponent({
 	// =============================================================================================================================
 	data() {
 		return {
-			store: undefined as FmmStoreImpl<FmmStoreValues, FmmStoreErrors>
+			store: undefined as unknown as FmmStoreImpl<FmmStoreValues, FmmStoreErrors>
 		};
 	},
 
@@ -185,7 +185,9 @@ export const FmmVueStore = defineComponent({
 	},
 
 	// =============================================================================================================================
-	render: (): VNode => undefined,
+	render() {
+		return null;
+	},
 
 	// =============================================================================================================================
 	watch: {
@@ -205,9 +207,10 @@ export const FmmVuex = defineComponent({
 	// =============================================================================================================================
 	data() {
 		return {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			$store: undefined as any, // to placate typescript compiler
-			unsubscribeToStore: undefined as () => void,
-			store: undefined as FmmStoreImpl<FmmStoreValues, FmmStoreErrors>
+			unsubscribeToStore: undefined as unknown as () => void,
+			store: undefined as unknown as FmmStoreImpl<FmmStoreValues, FmmStoreErrors>
 		};
 	},
 
@@ -230,7 +233,9 @@ export const FmmVuex = defineComponent({
 	},
 
 	// =============================================================================================================================
-	render: (): VNode => undefined,
+	render() {
+		return null;
+	},
 
 	// =============================================================================================================================
 	unmounted() {

@@ -4,15 +4,14 @@
 		"esModuleInterop": true,
 		"importHelpers": true,
 		"isolatedModules": false,
-		"jsx": "preserve",
-		"lib": ["es2020", "dom"],
+		"lib": ["dom", "es2020"],
 		"module": "es2020",
 		"moduleResolution": "node",
 		"outDir": "./dist",
+		"removeComments": true,
 		"strict": true,
-		"strictNullChecks": false,
-		"target": "es5"
+		"target": "es6"
 	},
 	"include": ["src"],
-	"exclude": ["node_modules"]
+	"exclude": ["dist", "node_modules"]
 }
