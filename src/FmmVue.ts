@@ -1,4 +1,4 @@
-import { Component, ComponentPublicInstance, PropType, defineComponent, h } from 'vue';
+import Vue from 'vue';
 import {
 	Fmm,
 	FmmFormHTML,
@@ -17,7 +17,7 @@ import {
 // =================================================================================================================================
 //						F M M V U E M I N I M A P
 // =================================================================================================================================
-export const FmmVueMinimap = defineComponent({
+export const FmmVueMinimap = Vue.defineComponent({
 	// =============================================================================================================================
 	//	emits: ['update'],
 
@@ -64,19 +64,19 @@ export const FmmVueMinimap = defineComponent({
 
 	// =============================================================================================================================
 	props: {
-		aggregateLabels: Object as PropType<FmmMapString>,
+		aggregateLabels: Object as Vue.PropType<FmmMapString>,
 		anchor: HTMLDivElement,
-		customElementIds: Array as PropType<string[]>,
+		customElementIds: Array as Vue.PropType<string[]>,
 		debounceMsec: Number,
-		dynamicLabels: Array as PropType<string[]>,
-		framework: Object as PropType<FmmFramework>,
+		dynamicLabels: Array as Vue.PropType<string[]>,
+		framework: Object as Vue.PropType<FmmFramework>,
 		page: HTMLDivElement,
 		panel: {
-			type: Object as PropType<ComponentPublicInstance>,
-			validator: (value: ComponentPublicInstance) => value.$options.name === 'FmmVuePanel'
+			type: Object as Vue.PropType<Vue.ComponentPublicInstance>,
+			validator: (value: Vue.ComponentPublicInstance) => value.$options.name === 'FmmVuePanel'
 		},
 		parent: HTMLDivElement,
-		store: Object as PropType<FmmStore>,
+		store: Object as Vue.PropType<FmmStore>,
 		title: {
 			required: true,
 			type: String,
@@ -89,7 +89,7 @@ export const FmmVueMinimap = defineComponent({
 	},
 
 	// =============================================================================================================================
-	render: () => h('div'),
+	render: () => Vue.h('div'),
 
 	// =============================================================================================================================
 	unmounted() {
@@ -107,7 +107,7 @@ export const FmmVueMinimap = defineComponent({
 // =================================================================================================================================
 //						F M M V U E P A N E L
 // =================================================================================================================================
-export const FmmVuePanel = defineComponent({
+export const FmmVuePanel = Vue.defineComponent({
 	// =============================================================================================================================
 	methods: {
 		destroyDetached() {
@@ -133,8 +133,8 @@ export const FmmVuePanel = defineComponent({
 
 	// =============================================================================================================================
 	render: () =>
-		h('div', { class: 'fmm-panel' }, [
-			h(
+		Vue.h('div', { class: 'fmm-panel' }, [
+			Vue.h(
 				'style',
 				{
 					tag: 'component',
@@ -155,7 +155,7 @@ export const FmmVuePanel = defineComponent({
 // =================================================================================================================================
 //						F M M V U E S T O R E
 // =================================================================================================================================
-export const FmmVueStore = defineComponent({
+export const FmmVueStore = Vue.defineComponent({
 	// =============================================================================================================================
 	data() {
 		return {
@@ -177,10 +177,10 @@ export const FmmVueStore = defineComponent({
 
 	// =============================================================================================================================
 	props: {
-		errors: Object as PropType<FmmStoreErrors>,
+		errors: Object as Vue.PropType<FmmStoreErrors>,
 		values: {
 			required: true,
-			type: Object as PropType<FmmStoreValues>
+			type: Object as Vue.PropType<FmmStoreValues>
 		}
 	},
 
@@ -203,7 +203,7 @@ export const FmmVueStore = defineComponent({
 // =================================================================================================================================
 //						F M M V U E X
 // =================================================================================================================================
-export const FmmVuex = defineComponent({
+export const FmmVuex = Vue.defineComponent({
 	// =============================================================================================================================
 	data() {
 		return {
@@ -229,7 +229,7 @@ export const FmmVuex = defineComponent({
 
 	// =============================================================================================================================
 	props: {
-		errors: Object as PropType<FmmStoreErrors>
+		errors: Object as Vue.PropType<FmmStoreErrors>
 	},
 
 	// =============================================================================================================================
@@ -260,8 +260,8 @@ export const FmmVuex = defineComponent({
 //						G
 // =================================================================================================================================
 const G: {
-	MINIMAPS: WeakMap<Component, FmmMinimap>;
-	PANELS: WeakMap<Component, FmmPanel>;
+	MINIMAPS: WeakMap<Vue.Component, FmmMinimap>;
+	PANELS: WeakMap<Vue.Component, FmmPanel>;
 } = {
 	MINIMAPS: new WeakMap(),
 	PANELS: new WeakMap()
