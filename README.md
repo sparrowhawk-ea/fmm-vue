@@ -2,6 +2,8 @@
 Vue components for [Form Minimap](https://www.npmjs.com/package/@eafmm/core).
 Please consult that documentation for further information on the concepts mentioned below.
 
+[Demo Appplication](https://sparrowhawk-ea.github.io/fmm-vue/)
+
 ***
 # Getting Started
 ## Installation
