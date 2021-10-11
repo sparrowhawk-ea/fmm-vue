@@ -4,26 +4,24 @@ import {
 	useVuelidate
 } from '@vuelidate/core';
 import { email, maxValue, minLength, minValue, required } from '@vuelidate/validators';
-// import { createVuetify } from 'vuetify';
-// import * as vuetifyComponents from 'vuetify/lib/components';
-// import * as vuetifyDirectives from 'vuetify/lib/directives';
-// import {
-// 	VApp,
-// 	VBtn,
-// 	VCheckbox,
-// 	VCol,
-// 	VContainer,
-// 	VIcon,
-// 	VMain,
-// 	VRadio,
-// 	VRadioGroup,
-// 	VRow,
-// 	VSelect,
-// 	VSwitch,
-// 	VTextField,
-// 	VTextarea
-// } from 'vuetify/lib';
-import VuetifyCss from 'vuetify/dist/vuetify.css';
+import { createVuetify } from 'vuetify';
+import {
+	VApp,
+	VBtn,
+	// VCheckbox,
+	VCol,
+	VContainer,
+	VIcon,
+	VMain,
+	// VRadio,
+	// VRadioGroup,
+	VRow,
+	// VSelect,
+	// VSwitch,
+	VTextField
+	// VTextarea
+} from 'vuetify/components';
+import VuetifyCss from 'vuetify/dist/vuetify.min.css';
 import { createStore } from 'vuex';
 import { FmmBootstrap4, FmmPanel, FmmStore, FmmStoreErrors } from '@eafmm/core';
 import { Ea, EaReactive, Earthsea } from '@eafmm/demo';
@@ -34,6 +32,12 @@ import { FmmVueMinimap, FmmVuePanel, FmmVuetify, FmmVuex } from './index';
 // =================================================	P R I V A T E	============================================================
 // =================================================================================================================================
 // =================================================================================================================================
+const VCheckbox = Vue.defineComponent({template: `<div></div>`});
+const VRadio = Vue.defineComponent({template: `<div></div>`});
+const VRadioGroup = Vue.defineComponent({template: `<div></div>`});
+const VSelect = Vue.defineComponent({template: `<div></div>`});
+const VSwitch = Vue.defineComponent({template: `<div></div>`});
+const VTextarea = Vue.defineComponent({template: `<div></div>`});
 
 // =================================================================================================================================
 //						B A S E O P T I O N S
@@ -80,7 +84,7 @@ const BaseOptions = {
 // =================================================================================================================================
 //						S T O R E
 // =================================================================================================================================
-export const store = createStore<Earthsea>({
+const store = createStore<Earthsea>({
 	mutations: {
 		setValue(state, [key, value]: [string, unknown]) {
 			state[key] = value;
@@ -468,8 +472,8 @@ const NativeBootstrap4 = Vue.defineComponent({
 // =================================================================================================================================
 const T0C = Vue.defineComponent({
 	components: {
-		// VCol,
-		// VSwitch
+		VCol,
+		VSwitch
 	},
 	data() {
 		return {
@@ -501,9 +505,9 @@ const T0C = Vue.defineComponent({
 // =================================================================================================================================
 const T0CG = Vue.defineComponent({
 	components: {
-		// VCheckbox,
-		// VCol,
-		// VRow
+		VCheckbox,
+		VCol,
+		VRow
 	},
 	name: 'T0CG',
 	props: {
@@ -534,7 +538,7 @@ const T0CG = Vue.defineComponent({
 // =================================================================================================================================
 const T0CL = Vue.defineComponent({
 	components: {
-		// VCheckbox
+		VCheckbox
 	},
 	name: 'T0CL',
 	props: {
@@ -562,8 +566,8 @@ const T0CL = Vue.defineComponent({
 // =================================================================================================================================
 const T0I = Vue.defineComponent({
 	components: {
-		// VCol,
-		// VTextField
+		VCol,
+		VTextField
 	},
 	data() {
 		return {
@@ -600,8 +604,8 @@ const T0I = Vue.defineComponent({
 // =================================================================================================================================
 const T0S = Vue.defineComponent({
 	components: {
-		// VCol,
-		// VSelect
+		VCol,
+		VSelect
 	},
 	computed: {
 		sitems() {
@@ -647,8 +651,8 @@ const T0S = Vue.defineComponent({
 // =================================================================================================================================
 const T0T = Vue.defineComponent({
 	components: {
-		// VCol,
-		// VTextarea
+		VCol,
+		VTextarea
 	},
 	data() {
 		return {
@@ -692,14 +696,14 @@ const T0Z = Vue.defineComponent({
 		T0CL,
 		T0I,
 		T0S,
-		T0T
-		// VBtn,
-		// VCol,
-		// VContainer,
-		// VIcon,
-		// VRadio,
-		// VRadioGroup,
-		// VRow
+		T0T,
+		VBtn,
+		VCol,
+		VContainer,
+		VIcon,
+		VRadio,
+		VRadioGroup,
+		VRow
 	},
 
 	// =============================================================================================================================
@@ -810,9 +814,9 @@ const VuexVuelidateVuetify = Vue.defineComponent({
 
 	// =============================================================================================================================
 	components: {
-		T0Z
-		// VApp,
-		// VMain
+		T0Z,
+		VApp,
+		VMain
 	},
 
 	// =============================================================================================================================
@@ -826,15 +830,16 @@ const VuexVuelidateVuetify = Vue.defineComponent({
 	name: 'VuexVuelidateVuetify',
 
 	// =============================================================================================================================
-	template: `
-<div :style='{ transform: "rotate(-45deg)", textAlign: "center", fontSize: "xx-large", fontWeight: "bold" }'>
+	template: `<div :style='{position:"relative"}'>
+<div :style='{ position:"absolute", width:"100%", zIndex:"1", transform: "rotate(-45deg)", textAlign: "center", fontSize: "xx-large", fontWeight: "bold" }'>
 	A W A I T I N G<br/>S T A B L E<br/>V U E T I F Y<br/>R E L E A S E
-	<!--component is='style' type='text/css'>{{ css }}</component>
+</div>
+	<component is='style' type='text/css'>{{ css }}</component>
 	<v-app>
 		<v-main>
 			<T0Z :anchor='anchor' :mkey='mkey' :page='page' :panel='panel' :title='title'/>
 		</v-main>
-	</v-app-->
+	</v-app>
 </div>`
 });
 
@@ -1154,7 +1159,7 @@ const VuexVuelidate = Vue.defineComponent({
 // =================================================================================================================================
 //						A P P V U E
 // =================================================================================================================================
-export const AppVue = Vue.defineComponent({
+const AppVue = Vue.defineComponent({
 	// =============================================================================================================================
 	components: {
 		FmmVuePanel,
@@ -1230,3 +1235,5 @@ export const AppVue = Vue.defineComponent({
 		this.refPanel = this.$refs.panel as Vue.ComponentPublicInstance<FmmPanel>;
 	}
 });
+
+export const app = Vue.createApp(AppVue).use(store).use(createVuetify());
