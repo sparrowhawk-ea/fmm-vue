@@ -17,8 +17,8 @@
 		"@vue/compiler-sfc": "3",
 		"@vue/eslint-config-prettier": "6",
 		"@vue/eslint-config-typescript": "7",
-		"@vuelidate/core": "^2.0.0-alpha.22",
-		"@vuelidate/validators": "^2.0.0-alpha.19",
+		"@vuelidate/core": "^2.0.0-alpha.27",
+		"@vuelidate/validators": "^2.0.0-alpha.23",
 		"eslint": "*",
 		"eslint-plugin-prettier": "*",
 		"eslint-plugin-vue": "7",
@@ -29,7 +29,7 @@
 		"rollup-plugin-import-css": "*",
 		"typescript": "*",
 		"vue": "3",
-		"vuetify": "^3.0.0-alpha.9",
+		"vuetify": "^3.0.0-alpha.11",
 		"vuex": "4"
 	},
 	"files": [
@@ -46,7 +46,7 @@
 	"module": "dist/index.mjs",
 	"name": "@eafmm/vue",
 	"peerDependencies": {
-		"@eafmm/core": "3"
+		"@eafmm/core": "4"
 	},
 	"prettier": {
 		"arrowParens": "avoid",
@@ -70,5 +70,5 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"typings": "dist/index.d.ts",
-	"version": "4.0.2"
+	"version": "5.0.0"
 }

@@ -11,6 +11,7 @@ declare const FmmVueMinimap: Vue.DefineComponent<{
     debounceMsec: NumberConstructor;
     dynamicLabels: Vue.PropType<string[]>;
     framework: Vue.PropType<FmmFramework>;
+    ordinal: NumberConstructor;
     page: {
         new (): HTMLDivElement;
         prototype: HTMLDivElement;
@@ -18,10 +19,6 @@ declare const FmmVueMinimap: Vue.DefineComponent<{
     panel: {
         type: Vue.PropType<Vue.ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, Vue.ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>>;
         validator: (value: Vue.ComponentPublicInstance) => boolean;
-    };
-    parent: {
-        new (): HTMLDivElement;
-        prototype: HTMLDivElement;
     };
     store: Vue.PropType<FmmStore>;
     title: {
@@ -43,9 +40,9 @@ declare const FmmVueMinimap: Vue.DefineComponent<{
     debounceMsec?: unknown;
     dynamicLabels?: unknown;
     framework?: unknown;
+    ordinal?: unknown;
     page?: unknown;
     panel?: unknown;
-    parent?: unknown;
     store?: unknown;
     title?: unknown;
     usePanelDetail?: unknown;
@@ -59,6 +56,7 @@ declare const FmmVueMinimap: Vue.DefineComponent<{
 } & {
     anchor?: HTMLDivElement | undefined;
     debounceMsec?: number | undefined;
+    ordinal?: number | undefined;
     page?: HTMLDivElement | undefined;
     panel?: {
         $: Vue.ComponentInternalInstance;
@@ -98,7 +96,6 @@ declare const FmmVueMinimap: Vue.DefineComponent<{
         $nextTick: typeof Vue.nextTick;
         $watch(source: string | Function, cb: Function, options?: Vue.WatchOptions<boolean> | undefined): Vue.WatchStopHandle;
     } | undefined;
-    parent?: HTMLDivElement | undefined;
     verbosity?: number | undefined;
     zoomFactor?: number | undefined;
     aggregateLabels?: FmmMapString | undefined;
@@ -115,13 +112,20 @@ declare const FmmVuePanel: Vue.DefineComponent<{
         new (): HTMLDivElement;
         prototype: HTMLDivElement;
     };
+    minimapsCount: {
+        required: true;
+        type: NumberConstructor;
+        validator: (value: number) => boolean;
+    };
     vertical: BooleanConstructor;
 }, unknown, unknown, {}, {
     destroyDetached(): void;
 }, Vue.ComponentOptionsMixin, Vue.ComponentOptionsMixin, Record<string, any>, string, Vue.VNodeProps & Vue.AllowedComponentProps & Vue.ComponentCustomProps, Readonly<{
     detailParent?: unknown;
+    minimapsCount?: unknown;
     vertical?: unknown;
 } & {
+    minimapsCount: number;
     vertical: boolean;
 } & {
     detailParent?: HTMLDivElement | undefined;

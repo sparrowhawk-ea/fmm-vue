@@ -1,5 +1,8 @@
 import Vue from 'vue';
-import useVuelidate from '@vuelidate/core';
+import {
+	Validation as VuelidateValidation,
+	useVuelidate
+} from '@vuelidate/core';
 import { email, maxValue, minLength, minValue, required } from '@vuelidate/validators';
 // import { createVuetify } from 'vuetify';
 // import * as vuetifyComponents from 'vuetify/lib/components';
@@ -20,7 +23,8 @@ import { email, maxValue, minLength, minValue, required } from '@vuelidate/valid
 // 	VTextField,
 // 	VTextarea
 // } from 'vuetify/lib';
-import Vuex from 'vuex';
+import VuetifyCss from 'vuetify/dist/vuetify.css';
+import { createStore } from 'vuex';
 import { FmmBootstrap4, FmmPanel, FmmStore, FmmStoreErrors } from '@eafmm/core';
 import { Ea, EaReactive, Earthsea } from '@eafmm/demo';
 import { FmmVueMinimap, FmmVuePanel, FmmVuetify, FmmVuex } from './index';
@@ -76,7 +80,7 @@ const BaseOptions = {
 // =================================================================================================================================
 //						S T O R E
 // =================================================================================================================================
-export const store = Vuex.createStore({
+export const store = createStore<Earthsea>({
 	mutations: {
 		setValue(state, [key, value]: [string, unknown]) {
 			state[key] = value;
@@ -96,19 +100,15 @@ const BaseOptionsVuexVuelidate = {
 	computed: {
 		validationErrors() {
 			const errors: FmmStoreErrors = {};
-			const c = this.v$ as Vue.Ref<Vuex.Validation<Vuex.ValidationArgs, unknown>>;
-            c.$touch();
-			c.$errors.forEach(({$message, $property}: {$message: string; $property: string}) => errors[$property] = $message);
+			const v = (this as any).v$ as VuelidateValidation;
+			v.$silentErrors.forEach(e => errors[e.$property] = typeof e.$message === 'string' ? e.$message : e.$message.value);
 			return errors;
 		},
 		...(function (computed: Record<string, Record<'get' | 'set', unknown>>) {
-			Object.keys(Ea.initialValues).forEach(
-				key =>
-					(computed[key] = {
-						get: () => store.state[key],
-						set: (value: unknown) => store.commit('setValue', [key, value])
-					})
-			);
+			Object.keys(Ea.initialValues).forEach(key => computed[key] = {
+				get: () => store.state[key],
+				set: (value: unknown) => store.commit('setValue', [key, value])
+			});
 			return computed;
 		})({})
 	},
@@ -155,7 +155,10 @@ const N0C = Vue.defineComponent({
 	props: {
 		className: String,
 		ea: Object as Vue.PropType<Earthsea>,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `
 <div :class='"form-group form-check " + (className || "")'>
@@ -210,7 +213,10 @@ const N0G = Vue.defineComponent({
 	name: 'N0G',
 	props: {
 		className: String,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `<div :class='"form-group " + (className || "")'>
 <label :for='id'>{{c.label}}</label>
@@ -236,7 +242,10 @@ const N0I = Vue.defineComponent({
 	props: {
 		className: String,
 		disabled: Boolean,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `<N0G :class='className' :id='id'>
 <input
@@ -268,7 +277,10 @@ const N0S = Vue.defineComponent({
 	name: 'N0S',
 	props: {
 		className: String,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `		<N0G :class='className' :id='id'>
 <select
@@ -301,7 +313,10 @@ const N0T = Vue.defineComponent({
 	name: 'N0T',
 	props: {
 		className: String,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `<N0G :class='className' :id='id'>
 <textarea class='form-control' :id='id' :name='id' :placeholder='c.placeholder' :required='r' />
@@ -332,8 +347,8 @@ const NativeBootstrap4 = Vue.defineComponent({
 
 	// =============================================================================================================================
 	methods: {
-		onChangeUseName(ev: MouseEvent) {
-			this.ea.onChangeUseName((ev.target as HTMLInputElement).form.elements.namedItem('useNames'));
+		onChangeUseName() {
+			this.ea.onChangeUseName((this.$refs.form as HTMLFormElement).elements.namedItem('useNames') as RadioNodeList);
 		}
 	},
 
@@ -343,13 +358,14 @@ const NativeBootstrap4 = Vue.defineComponent({
 	// =============================================================================================================================
 	template: `
 	<div class='bootstrap-iso card'>
-		<form class='card-body' @submit='submit()'>
+		<form ref='form' class='card-body' @submit='submit()'>
 			<FmmVueMinimap
 				:aggregateLabels='aggregateLabels'
 				:anchor='anchor'
 				:customElementIds='ea.customElementIds'
 				:framework='framework'
 				:key='mkey'
+				:ordinal='parseInt(mkey)'
 				:page='page'
 				:panel='mkey.endsWith("truetrue")? undefined: panel'
 				:title='title'
@@ -464,7 +480,10 @@ const T0C = Vue.defineComponent({
 	props: {
 		cols: String,
 		errors: Object as Vue.PropType<Record<string, string>>,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `<v-col :cols='cols'>
 <v-switch
@@ -556,7 +575,10 @@ const T0I = Vue.defineComponent({
 		cols: String,
 		disabled: Boolean,
 		errors: Object as Vue.PropType<Record<string, string>>,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `		<v-col :cols='cols'>
 <v-text-field
@@ -601,7 +623,10 @@ const T0S = Vue.defineComponent({
 	props: {
 		cols: String,
 		errors: Object as Vue.PropType<Record<string, string>>,
-		id: String,
+		id: {
+			type: String,
+			required: true
+		},
 		items: Array as Vue.PropType<string[] | string[][]>
 	},
 	template: `		<v-col :cols='cols'>
@@ -634,7 +659,10 @@ const T0T = Vue.defineComponent({
 	props: {
 		cols: String,
 		errors: Object as Vue.PropType<Record<string, string>>,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `<v-col :cols='cols'>
 <v-textarea
@@ -678,7 +706,7 @@ const T0Z = Vue.defineComponent({
 	methods: {
 		onChangeUseName(_: MouseEvent) {
 			window.setTimeout(
-				() => this.ea.onChangeUseName((this.$refs.form as HTMLFormElement).elements.namedItem('useNames')),
+				() => this.ea.onChangeUseName((this.$refs.form as HTMLFormElement).elements.namedItem('useNames') as RadioNodeList),
 				this.debounceMsec
 			);
 		}
@@ -705,6 +733,7 @@ const T0Z = Vue.defineComponent({
 		:debounceMsec='debounceMsec'
 		:framework='framework'
 		:key='mkey'
+		:ordinal='parseInt(mkey)'
 		:page='page'
 		:panel='panel'
 		:store='fmmStore'
@@ -789,7 +818,7 @@ const VuexVuelidateVuetify = Vue.defineComponent({
 	// =============================================================================================================================
 	data() {
 		return {
-			css: import('vuetify/dist/vuetify.min.css').toString()
+			css: VuetifyCss
 		};
 	},
 
@@ -821,7 +850,10 @@ const V0C = Vue.defineComponent({
 	name: 'V0C',
 	props: {
 		className: String,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `
 <div :class='"form-group form-check " + (className || "")'>
@@ -877,7 +909,10 @@ const V0G = Vue.defineComponent({
 	name: 'V0G',
 	props: {
 		className: String,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `<div :class='"form-group " + (className || "")'>
 <label :for='id'>{{c.label}}</label>
@@ -902,7 +937,10 @@ const V0I = Vue.defineComponent({
 	props: {
 		className: String,
 		disabled: Boolean,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `		<V0G :class='className' :id='id'>
 <input
@@ -933,7 +971,10 @@ const V0S = Vue.defineComponent({
 	name: 'V0S',
 	props: {
 		className: String,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `		<V0G :class='className' :id='id'>
 <select
@@ -965,7 +1006,10 @@ const V0T = Vue.defineComponent({
 	name: 'V0T',
 	props: {
 		className: String,
-		id: String
+		id: {
+			type: String,
+			required: true
+		}
 	},
 	template: `<V0G :class='className' :id='id'>
 <textarea class='form-control' :id='id' :name='id' :placeholder='c.placeholder' v-model='$parent[id]' />
@@ -993,7 +1037,7 @@ const VuexVuelidate = Vue.defineComponent({
 	// =============================================================================================================================
 	methods: {
 		onChangeUseName(_: MouseEvent) {
-			this.ea.onChangeUseName((this.$refs.form as HTMLFormElement).elements.namedItem('useNames'));
+			this.ea.onChangeUseName((this.$refs.form as HTMLFormElement).elements.namedItem('useNames') as RadioNodeList);
 		}
 	},
 
@@ -1012,6 +1056,7 @@ const VuexVuelidate = Vue.defineComponent({
 				:customElementIds='ea.customElementIds'
 				:framework='framework'
 				:key='mkey'
+				:ordinal='parseInt(mkey)'
 				:page='page'
 				:panel='panel'
 				:store='fmmStore'
@@ -1121,19 +1166,19 @@ export const AppVue = Vue.defineComponent({
 	// =============================================================================================================================
 	data: () => ({
 		css: Ea.css + ' legend { display: inline }',
-		refAnchor0: undefined as HTMLDivElement,
-		refAnchor1: undefined as HTMLDivElement,
-		refAnchor2: undefined as HTMLDivElement,
-		refDetail: undefined as HTMLDivElement,
-		refPage: undefined as HTMLDivElement,
-		refPanel: undefined as Vue.ComponentPublicInstance,
+		refAnchor0: undefined as unknown as HTMLDivElement,
+		refAnchor1: undefined as unknown as HTMLDivElement,
+		refAnchor2: undefined as unknown as HTMLDivElement,
+		refDetail: undefined as unknown as HTMLDivElement,
+		refPage: undefined as unknown as HTMLDivElement,
+		refPanel: undefined as unknown as Vue.ComponentPublicInstance<FmmPanel>,
 		s: { a: false, d: false, n: 0, t: ['Native Bootstrap4', 'Vuex Vuelidate', 'Vuex Vuelidate Vuetify'] }
 	}),
 
 	// =============================================================================================================================
 	methods: {
 		destroyDetached() {
-			window.setTimeout(() => (this.refPanel as FmmPanel).destroyDetached(), 10);
+			window.setTimeout(() => this.refPanel.destroyDetached(), 10);
 		}
 	},
 
@@ -1165,13 +1210,13 @@ export const AppVue = Vue.defineComponent({
 				Detail view can shown in the panel or <input type='checkbox' @change='destroyDetached(s.d = $event.target.checked)'/>
 					floated per minimap.
 			</div>
+			<FmmVuePanel v-if='refDetail' ref='panel' :detailParent='refDetail' :minimapsCount='s.t.length'/>
+			<div ref='detail' class='detail' :style='{ display: s.d? "none": "block" }'></div>
 			<div class='anchors'>
 				<div :class='{ active: s.n === 0}' ref='anchor0'></div>
 				<div :class='{ active: s.n === 1}' ref='anchor1'></div>
 				<div :class='{ active: s.n === 2}' ref='anchor2'></div>
 			</div>
-			<FmmVuePanel v-if='refDetail' ref='panel' :detailParent='refDetail'/>
-			<div ref='detail' class='detail' :style='{ display: s.d? "none": "block" }'></div>
 			<div style='clear: both'/>
 			</div>
 		<NativeBootstrap4 v-if='refPanel && s.n === 0' :mkey='"0"+s.a+s.d' :anchor='s.a? refAnchor0: null' :page='refPage' :panel='refPanel' :title='s.t[0]'/>
@@ -1182,6 +1227,6 @@ export const AppVue = Vue.defineComponent({
 
 	// =============================================================================================================================
 	updated() {
-		this.refPanel = this.$refs.panel as Vue.ComponentPublicInstance;
+		this.refPanel = this.$refs.panel as Vue.ComponentPublicInstance<FmmPanel>;
 	}
 });

@@ -45,6 +45,7 @@ export const FmmVueMinimap = Vue.defineComponent({
 			form: new FmmFormHTML(form as HTMLFormElement, this.page),
 			framework: this.framework,
 			onUpdate: (snapshot: Readonly<FmmSnapshots>) => this.$emit('update', snapshot),
+			ordinal: this.ordinal,
 			store: this.store,
 			title: this.title,
 			usePanelDetail: this.usePanelDetail,
@@ -52,7 +53,7 @@ export const FmmVueMinimap = Vue.defineComponent({
 			verbosity: this.verbosity,
 			zoomFactor: this.zoomFactor
 		};
-		const minimap = this.panel ? G.PANELS.get(this.panel)?.createMinimap(fmcp) : Fmm.createMinimap(fmcp, this.parent);
+		const minimap = this.panel ? G.PANELS.get(this.panel)?.createMinimap(fmcp) : Fmm.createMinimap(fmcp);
 		if (!minimap) return;
 		G.MINIMAPS.set(this, minimap);
 		minimap.compose(this.customElementIds);
@@ -70,12 +71,12 @@ export const FmmVueMinimap = Vue.defineComponent({
 		debounceMsec: Number,
 		dynamicLabels: Array as Vue.PropType<string[]>,
 		framework: Object as Vue.PropType<FmmFramework>,
+		ordinal: Number,
 		page: HTMLDivElement,
 		panel: {
 			type: Object as Vue.PropType<Vue.ComponentPublicInstance>,
 			validator: (value: Vue.ComponentPublicInstance) => value.$options.name === 'FmmVuePanel'
 		},
-		parent: HTMLDivElement,
 		store: Object as Vue.PropType<FmmStore>,
 		title: {
 			required: true,
@@ -119,7 +120,7 @@ export const FmmVuePanel = Vue.defineComponent({
 	// =============================================================================================================================
 	mounted() {
 		if (Object.keys(this.$slots).length) throw new Error('FmmVuePanel is a contentless tag');
-		G.PANELS.set(this, Fmm.createPanel(this.$el as HTMLDivElement, this.detailParent, this.vertical));
+		G.PANELS.set(this, Fmm.createPanel(this.$el as HTMLDivElement, this.minimapsCount, this.detailParent, this.vertical));
 	},
 
 	// =============================================================================================================================
@@ -128,6 +129,11 @@ export const FmmVuePanel = Vue.defineComponent({
 	// =============================================================================================================================
 	props: {
 		detailParent: HTMLDivElement,
+		minimapsCount: {
+			required: true,
+			type: Number,
+			validator: (value: number) => value > 0
+		},
 		vertical: Boolean
 	},
 
@@ -260,8 +266,8 @@ export const FmmVuex = Vue.defineComponent({
 //						G
 // =================================================================================================================================
 const G: {
-	MINIMAPS: WeakMap<Vue.Component, FmmMinimap>;
-	PANELS: WeakMap<Vue.Component, FmmPanel>;
+	MINIMAPS: WeakMap<Vue.ComponentPublicInstance, FmmMinimap>;
+	PANELS: WeakMap<Vue.ComponentPublicInstance, FmmPanel>;
 } = {
 	MINIMAPS: new WeakMap(),
 	PANELS: new WeakMap()

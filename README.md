@@ -39,11 +39,10 @@ M P     </style>
 
         <template>
             <div id="app">
-M               <div ref='parent' style='width:70px; height:50px; margin-left:200px'></div>
-  P             <div ref='anchor' style='width:20px; height:20px; margin-left:200px'></div>
+M P             <div ref='anchor' style='width:20px; height:20px; margin-left:200px'></div>
   P             <FmmVuePanel ref='panel'/>
                 <form>
-M                   <FmmVueMinimap :parent='this.$refs.parent' title='Title'/>
+M                   <FmmVueMinimap :anchor='this.$refs.anchor' title='Title'/>
   P                 <FmmVueMinimap v-if='refPanel' :anchor='this.$refs.anchor' :panel='refPanel' title='Title'/>
                     <input id="Input1"/><br/>
                     <input id="Input2"/><br/>
@@ -59,7 +58,7 @@ M                   <FmmVueMinimap :parent='this.$refs.parent' title='Title'/>
 ## FmmVueMinimap
 Component to create and manage [FmmMinimap](https://www.npmjs.com/package/@eafmm/core#fmmminimap).
 The minimap is detached when this component is unmounted.
-For minimaps in a panel, use the panelproperty; otherwise use the parent property to show an always-visible minimap, or anchor for a popup minimap.
+For minimaps in a panel, use the panelproperty; otherwise an anchor for a popup minimap.
 
 Property | Type | Required
 --- | --- | :---:
@@ -69,9 +68,9 @@ Property | Type | Required
 [debounceMsec](https://www.npmjs.com/package/@eafmm/core#mcp-debouncemsec) | Number
 [dynamicLabels](https://www.npmjs.com/package/@eafmm/core#mcp-dynamiclabels) | string[]
 [framework](https://www.npmjs.com/package/@eafmm/core#mcp-framework) | [FmmFramework](https://www.npmjs.com/package/@eafmm/core#fmmframework)
+[ordinal](https://www.npmjs.com/package/@eafmm/core#pcm-ordinal) | number
 [page](https://www.npmjs.com/package/@eafmm/core#fmmform-page) | HTMLElement
 panel | [FmmVuePanel](#fmmvuepanel)
-[parent](https://www.npmjs.com/package/@eafmm/core#pcm-parent) | HTMLElement
 [store](https://www.npmjs.com/package/@eafmm/core#mcp-store) | [FmmVueStore](#fmmvuestore)
 [title](https://www.npmjs.com/package/@eafmm/core#mcp-title) | String | &check;
 [usePanelDetail](https://www.npmjs.com/package/@eafmm/core#mcp-usepaneldetail) | Boolean
@@ -95,6 +94,7 @@ Component to create and manage [FmmPanel](https://www.npmjs.com/package/@eafmm/c
 Property | Type | Required
 --- | --- | :---:
 [detailParent](https://www.npmjs.com/package/@eafmm/core#pcp-detailparent) | HTMLDivElements
+[minimapsCount](https://www.npmjs.com/package/@eafmm/core#pcp-minimapscount) | number
 [vertical](https://www.npmjs.com/package/@eafmm/core#pcp-vertical) | boolean
 
 | Method
