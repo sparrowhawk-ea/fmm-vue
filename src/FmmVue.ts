@@ -227,7 +227,9 @@ export const FmmVuex = Vue.defineComponent({
 	mounted() {
 		if (Object.keys(this.$slots).length) throw new Error('FmmVuex is a contentless tag');
 		this.$emit('store', (this.store = new FmmStoreImpl(this.$store.state, this.errors)));
-		this.unsubscribeToStore = this.$store.subscribe((_: unknown, state: FmmStoreValues) => this.store.update(state, this.errors));
+		this.unsubscribeToStore = this.$store.subscribe((_: unknown, state: FmmStoreValues) =>
+			this.store.update(state, this.errors)
+		);
 	},
 
 	// =============================================================================================================================

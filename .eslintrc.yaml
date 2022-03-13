@@ -6,11 +6,9 @@ overrides:
       env:
         es6: true
       extends:
-        - plugin:vue/essential
-        - eslint:recommended
-        - "@vue/typescript/recommended"
-        - "@vue/prettier"
-        - "@vue/prettier/@typescript-eslint"
+        - plugin:vue/vue3-essential
+        - "@vue/eslint-config-typescript/recommended"
+        - "@vue/eslint-config-prettier"
       parserOptions:
         ecmaVersion: 2018
         project: tsconfig.json

@@ -1,8 +1,5 @@
 import Vue from 'vue';
-import {
-	Validation as VuelidateValidation,
-	useVuelidate
-} from '@vuelidate/core';
+import { Validation as VuelidateValidation, useVuelidate } from '@vuelidate/core';
 import { email, maxValue, minLength, minValue, required } from '@vuelidate/validators';
 import { createVuetify } from 'vuetify';
 import {
@@ -32,12 +29,12 @@ import { FmmVueMinimap, FmmVuePanel, FmmVuetify, FmmVuex } from './index';
 // =================================================	P R I V A T E	============================================================
 // =================================================================================================================================
 // =================================================================================================================================
-const VCheckbox = Vue.defineComponent({template: `<div></div>`});
-const VRadio = Vue.defineComponent({template: `<div></div>`});
-const VRadioGroup = Vue.defineComponent({template: `<div></div>`});
-const VSelect = Vue.defineComponent({template: `<div></div>`});
-const VSwitch = Vue.defineComponent({template: `<div></div>`});
-const VTextarea = Vue.defineComponent({template: `<div></div>`});
+const VCheckbox = Vue.defineComponent({ template: `<div></div>` });
+const VRadio = Vue.defineComponent({ template: `<div></div>` });
+const VRadioGroup = Vue.defineComponent({ template: `<div></div>` });
+const VSelect = Vue.defineComponent({ template: `<div></div>` });
+const VSwitch = Vue.defineComponent({ template: `<div></div>` });
+const VTextarea = Vue.defineComponent({ template: `<div></div>` });
 
 // =================================================================================================================================
 //						B A S E O P T I O N S
@@ -104,15 +101,19 @@ const BaseOptionsVuexVuelidate = {
 	computed: {
 		validationErrors() {
 			const errors: FmmStoreErrors = {};
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const v = (this as any).v$ as VuelidateValidation;
-			v.$silentErrors.forEach(e => errors[e.$property] = typeof e.$message === 'string' ? e.$message : e.$message.value);
+			v.$silentErrors.forEach(e => (errors[e.$property] = typeof e.$message === 'string' ? e.$message : e.$message.value));
 			return errors;
 		},
 		...(function (computed: Record<string, Record<'get' | 'set', unknown>>) {
-			Object.keys(Ea.initialValues).forEach(key => computed[key] = {
-				get: () => store.state[key],
-				set: (value: unknown) => store.commit('setValue', [key, value])
-			});
+			Object.keys(Ea.initialValues).forEach(
+				key =>
+					(computed[key] = {
+						get: () => store.state[key],
+						set: (value: unknown) => store.commit('setValue', [key, value])
+					})
+			);
 			return computed;
 		})({})
 	},
